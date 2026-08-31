@@ -183,11 +183,11 @@ src/
 
 | | Brut | Gzip (transféré) |
 | --- | --- | --- |
-| JS | 218 ko | **69 ko** |
+| JS | 231 ko | **72 ko** |
 | CSS | 15 ko | 4 ko |
 | Fond de carte (à la demande) | — | 72 ko |
 
-Le poids JS vient entièrement de `react-dom` ; le code du jeu pèse ~19 ko.
+Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les 28 questions pèsent ~32 ko.
 La cible de 150 ko est tenue en transféré, pas en brut.
 
 Pour descendre sous 150 ko **bruts**, aliaser React vers `preact/compat` —
@@ -210,8 +210,46 @@ Pas de collecte d'e-mail, pas de compte, pas de classement global — et
 l'architecture n'en interdit aucun : le contenu est déjà externalisé, l'état de
 jeu déjà centralisé et détaillé réponse par réponse.
 
-## À valider avant mise en ligne
+## Séries publiées
 
-Les 7 questions de la série `finales` sont des exemples rédigés pour la
-livraison. **Leur exactitude factuelle est à faire valider par l'équipe
-éditoriale** avant publication.
+Quatre séries de 7 questions, bilingues. La série servie par défaut est la plus
+récente par `published_at` — aujourd'hui `edition-2026`.
+
+| `serie` | Titre | Publiée le | Angle |
+| --- | --- | --- | --- |
+| `edition-2026` | L'édition 2026 | 2026-05-24 | Le tournoi de mai dernier : Tien, Navone, les têtes de série |
+| `champions` | Les champions | 2026-03-16 | Vainqueurs et finalistes, 2015 → 2025 |
+| `tournoi` | Le tournoi | 2025-11-10 | Histoire, lieu, format, sponsor |
+| `finales` | Les finales | 2025-05-19 | Les finales et leur contexte |
+
+Liens directs : `?serie=champions`, `?serie=tournoi`, `?serie=finales`.
+Un identifiant inconnu retombe silencieusement sur la série la plus récente.
+
+La bonne réponse est répartie sur les quatre positions (7 / 9 / 7 / 5 sur les
+28 questions) : pas de biais exploitable en cliquant toujours au même endroit.
+Les listes qui ont un ordre naturel — années, nombres, stades de la compétition
+— sont laissées dans cet ordre plutôt que mélangées.
+
+---
+
+## Sources du contenu
+
+Les 28 questions sont adossées à des sources publiques, vérifiées à la
+rédaction (août 2026) :
+
+- Tableau complet des finales, catégories successives, records :
+  [Geneva Open — Wikipedia](https://en.wikipedia.org/wiki/Geneva_Open)
+- Édition 2026 (dates, format, têtes de série, invitations, finales) :
+  [2026 Geneva Open — Wikipedia](https://en.wikipedia.org/wiki/2026_Geneva_Open)
+- Édition 2021 (première sous le nom Gonet, Federer tête de série) :
+  [2021 Geneva Open — Wikipedia](https://en.wikipedia.org/wiki/2021_Geneva_Open)
+- Demi-finale 2026 Navone – Ruud :
+  [ATP Tour](https://www.atptour.com/en/news/geneva-2026-sfs-friday)
+- Federer – Andújar 2021 :
+  [Tennis.com](https://www.tennis.com/news/articles/in-geneva-roger-federer-loses-clay-court-comeback-to-pablo-andujar)
+- Engagement de la Banque Gonet comme sponsor-titre jusqu'en 2030 :
+  [Allnews](https://www.allnews.ch/content/corporate/la-banque-gonet-s%E2%80%99engage-comme-sponsor-titre-du-geneva-open-jusqu%E2%80%99en-2030)
+
+**À faire avant mise en ligne :** une relecture éditoriale reste souhaitable,
+notamment sur le ton des explications et sur tout fait susceptible d'avoir
+bougé depuis (classements cités, engagements de sponsoring).
