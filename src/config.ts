@@ -2,6 +2,9 @@
  * Réglages de comportement. Les réglages visuels sont dans src/styles/theme.css.
  */
 
+/** Nombre de questions tirées pour une partie. */
+export const QUESTIONS_PER_GAME = 7
+
 /** Durée du chrono par question. */
 export const QUESTION_DURATION_MS = 10_000
 
@@ -16,9 +19,6 @@ export const TOURNAMENT = {
   venue: 'Parc des Eaux-Vives',
   url: 'jeu.gonetgenevaopen.com',
 } as const
-
-/** Nom du paramètre d'URL qui sélectionne la série. */
-export const SERIE_PARAM = 'serie'
 
 /** Clé de persistance du choix de langue (seule chose persistée en v1). */
 export const LANG_STORAGE_KEY = 'ggo.lang'

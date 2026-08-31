@@ -1,41 +1,33 @@
 import { useCallback, useMemo, useReducer } from 'react'
+import { QUESTIONS_PER_GAME } from './config'
 import { HomeScreen } from './components/HomeScreen'
-import { MenuScreen } from './components/MenuScreen'
 import { QuestionScreen } from './components/QuestionScreen'
 import { ScoreScreen } from './components/ScoreScreen'
 import { gameReducer, initGame } from './game/reducer'
 import { useLang } from './i18n/LanguageContext'
-import { getSerie, listSeries, questionCount, serieIdFromUrl } from './lib/series'
-import type { Serie } from './types'
+import { drawQuestionIds, questionsByIds } from './lib/questions'
 
 export default function App() {
   const { lang, t } = useLang()
 
-  // La série demandée est lue une seule fois : l'app est mono-page, l'URL ne
-  // change pas en cours de partie. Un identifiant inconnu ouvre le menu.
-  const initial = useMemo(() => {
-    const requested = serieIdFromUrl()
-    const known = requested && questionCount(requested) > 0 ? requested : null
-    return { serieId: known, total: known ? questionCount(known) : 0 }
-  }, [])
-
   // Un seul reducer pour tout l'état de jeu. Changer de langue ne le touche
   // pas : la partie en cours continue, traduite à la volée.
-  const [state, dispatch] = useReducer(gameReducer, initial, initGame)
+  const [state, dispatch] = useReducer(gameReducer, undefined, initGame)
 
-  const series = useMemo(() => listSeries(lang), [lang])
-  const serie = useMemo(() => getSerie(lang, state.serieId), [lang, state.serieId])
-  const question = serie?.questions[state.index]
+  // Le tirage vit dans l'état sous forme d'identifiants ; seule la traduction
+  // dépend de la langue.
+  const questions = useMemo(
+    () => questionsByIds(state.questionIds, lang),
+    [state.questionIds, lang],
+  )
+  const question = questions[state.index]
 
-  // Ouvert sur un lien direct : pas de menu derrière, donc pas de retour.
-  const cameFromLink = initial.serieId !== null
+  const handleStart = useCallback(() => {
+    dispatch({ type: 'start', questionIds: drawQuestionIds(QUESTIONS_PER_GAME) })
+  }, [])
 
-  const handleSelect = useCallback((picked: Serie) => {
-    dispatch({
-      type: 'selectSerie',
-      serieId: picked.id,
-      total: picked.questions.length,
-    })
+  const handleReplay = useCallback(() => {
+    dispatch({ type: 'restart', questionIds: drawQuestionIds(QUESTIONS_PER_GAME) })
   }, [])
 
   const handleAnswer = useCallback(
@@ -52,7 +44,6 @@ export default function App() {
   )
 
   const handleNext = useCallback(() => dispatch({ type: 'next' }), [])
-  const handleMenu = useCallback(() => dispatch({ type: 'menu' }), [])
 
   return (
     <>
@@ -63,17 +54,7 @@ export default function App() {
         {t.skipToContent}
       </a>
 
-      {state.phase === 'menu' && (
-        <MenuScreen series={series} onSelect={handleSelect} />
-      )}
-
-      {state.phase === 'home' && serie && (
-        <HomeScreen
-          serie={serie}
-          onStart={() => dispatch({ type: 'start' })}
-          onBack={cameFromLink ? undefined : handleMenu}
-        />
-      )}
+      {state.phase === 'home' && <HomeScreen onStart={handleStart} />}
 
       {(state.phase === 'playing' || state.phase === 'feedback') && question && (
         <QuestionScreen
@@ -82,7 +63,7 @@ export default function App() {
           key={`${state.runId}-${state.index}`}
           question={question}
           index={state.index}
-          total={state.total}
+          total={state.questionIds.length}
           phase={state.phase}
           selected={state.selected}
           timedOut={state.timedOut}
@@ -91,13 +72,11 @@ export default function App() {
         />
       )}
 
-      {state.phase === 'score' && serie && (
+      {state.phase === 'score' && (
         <ScoreScreen
           score={state.score}
-          total={state.total}
-          serie={serie}
-          onReplay={() => dispatch({ type: 'restart' })}
-          onMenu={handleMenu}
+          total={state.questionIds.length}
+          onReplay={handleReplay}
         />
       )}
     </>

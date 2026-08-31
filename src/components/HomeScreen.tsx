@@ -1,18 +1,16 @@
-import { QUESTION_DURATION_MS } from '../config'
+import { QUESTION_DURATION_MS, QUESTIONS_PER_GAME } from '../config'
 import { useLang } from '../i18n/LanguageContext'
 import { format } from '../i18n/strings'
-import type { Serie } from '../types'
+import { poolSize } from '../lib/questions'
 import { Shell } from './Shell'
 
 interface Props {
-  serie: Serie
   onStart: () => void
-  /** Retour au menu. Absent si l'app a été ouverte sur un lien ?serie=… direct. */
-  onBack?: () => void
 }
 
-export function HomeScreen({ serie, onStart, onBack }: Props) {
+export function HomeScreen({ onStart }: Props) {
   const { t } = useLang()
+  const pool = poolSize()
 
   return (
     <Shell
@@ -34,30 +32,19 @@ export function HomeScreen({ serie, onStart, onBack }: Props) {
           {t.eyebrow}
         </p>
 
-        <h1 className="mt-3 text-[40px] leading-[1.05] font-extrabold tracking-tight text-balance">
-          {serie.title}
+        <h1 className="mt-3 text-[38px] leading-[1.05] font-extrabold tracking-tight text-balance">
+          {t.homeTitle}
         </h1>
-
-        <p className="mt-3.5 max-w-[30ch] text-[16px] leading-snug font-medium text-[var(--c-on-brand-secondary)]">
-          {serie.subtitle}
-        </p>
 
         <hr className="mt-7 w-10 border-0 border-t-2 border-[color-mix(in_srgb,var(--c-on-brand-secondary)_35%,transparent)]" />
 
-        <p className="mt-5 text-[15px] font-semibold text-[var(--c-on-brand-secondary)]">
-          {format(t.questionCount, { n: serie.questions.length })} ·{' '}
+        <p className="mt-5 text-[16px] leading-snug font-semibold text-[var(--c-on-brand-secondary)]">
+          {format(t.questionCount, { n: QUESTIONS_PER_GAME })}.{' '}
+          {format(t.poolNote, { n: pool })}
+        </p>
+        <p className="mt-1 text-[16px] leading-snug font-medium text-[var(--c-on-brand-secondary)]">
           {format(t.rules, { s: QUESTION_DURATION_MS / 1000 })}
         </p>
-
-        {onBack && (
-          <button
-            type="button"
-            onClick={onBack}
-            className="mt-6 min-h-[var(--tap-min)] self-start text-[14px] font-bold text-[var(--c-on-brand-secondary)] underline underline-offset-4"
-          >
-            {t.allSeries}
-          </button>
-        )}
       </div>
     </Shell>
   )

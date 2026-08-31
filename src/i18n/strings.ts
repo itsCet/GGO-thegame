@@ -8,19 +8,13 @@ export interface Strings {
   switchTo: string
   skipToContent: string
 
-  /* Menu */
-  menuTitle: string
-  menuLead: string
-  badgeNew: string
-  serieMeta: string // {n}
-  allSeries: string
-  otherSeries: string
-
   /* Accueil */
   eyebrow: string
+  homeTitle: string
   questionCount: string // {n}
+  poolNote: string // {n}
+  rules: string // {s}
   play: string
-  rules: string
 
   /* Question */
   progress: string // {n} {total}
@@ -51,17 +45,12 @@ const fr: Strings = {
   switchTo: 'Switch to English',
   skipToContent: 'Aller au contenu',
 
-  menuTitle: 'Choisis ta série',
-  menuLead: 'Sept questions, dix secondes chacune.',
-  badgeNew: 'Nouveau',
-  serieMeta: '{n} questions',
-  allSeries: 'Toutes les séries',
-  otherSeries: 'Autres séries',
-
   eyebrow: 'ATP 250 · Genève · Terre battue',
+  homeTitle: 'Connais‑tu vraiment le tournoi ?',
   questionCount: '{n} questions',
-  play: 'Jouer',
+  poolNote: 'Tirées au hasard parmi {n}.',
   rules: '{s} secondes par question. Une seule réponse.',
+  play: 'Jouer',
 
   progress: 'Question {n} sur {total}',
   timerLabel: 'Temps restant',
@@ -94,17 +83,12 @@ const en: Strings = {
   switchTo: 'Passer en français',
   skipToContent: 'Skip to content',
 
-  menuTitle: 'Pick a series',
-  menuLead: 'Seven questions, ten seconds each.',
-  badgeNew: 'New',
-  serieMeta: '{n} questions',
-  allSeries: 'All series',
-  otherSeries: 'Other series',
-
   eyebrow: 'ATP 250 · Geneva · Clay',
+  homeTitle: 'How well do you know the tournament?',
   questionCount: '{n} questions',
-  play: 'Play',
+  poolNote: 'Drawn at random from {n}.',
   rules: '{s} seconds per question. One answer only.',
+  play: 'Play',
 
   progress: 'Question {n} of {total}',
   timerLabel: 'Time left',

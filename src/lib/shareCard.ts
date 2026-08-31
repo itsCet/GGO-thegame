@@ -31,7 +31,7 @@ const CX = CARD_W / 2
 
 /** Lignes de base de la composition, dans la zone libre 470–1660. */
 const Y = {
-  serie: 600,
+  eyebrow: 600,
   ruleTop: 662,
   scoreLabel: 792,
   score: 1180,
@@ -49,8 +49,8 @@ export interface ShareCardData {
   tierLabel: string
   /** Phrase courte sous le palier. */
   tierLine: string
-  /** Titre de la série jouée. */
-  serieTitle: string
+  /** « ATP 250 · Genève · Terre battue ». */
+  eyebrow: string
   /** « Ton score » / « Your score ». */
   scoreLabel: string
   /** « Joue à ton tour » / « Play your turn ». */
@@ -198,11 +198,11 @@ export async function renderShareCard(
 
   const ink = theme.onBrand
 
-  /* Titre de série. */
+  /* Ligne de contexte du tournoi. */
   ctx.fillStyle = ink
-  const serie = data.serieTitle.toUpperCase()
-  const serieSize = fitSize(ctx, serie, 860, 34, 24, 700, f, 0.16)
-  drawTracked(ctx, serie, CX, Y.serie, serieSize * 0.16)
+  const eyebrow = data.eyebrow.toUpperCase()
+  const eyebrowSize = fitSize(ctx, eyebrow, 860, 32, 22, 700, f, 0.16)
+  drawTracked(ctx, eyebrow, CX, Y.eyebrow, eyebrowSize * 0.16)
 
   ctx.globalAlpha = 0.5
   ctx.fillRect(CX - 40, Y.ruleTop, 80, 3)

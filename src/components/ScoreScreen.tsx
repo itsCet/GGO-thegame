@@ -5,21 +5,17 @@ import { format } from '../i18n/strings'
 import { tierFor } from '../lib/score'
 import { shareImage } from '../lib/share'
 import { canvasToBlob, renderShareCard } from '../lib/shareCard'
-import type { Serie } from '../types'
 import { Shell } from './Shell'
 
 interface Props {
   score: number
   total: number
-  serie: Serie
   onReplay: () => void
-  /** Retour au menu des séries. */
-  onMenu: () => void
 }
 
 type ShareStatus = 'idle' | 'busy' | 'downloaded' | 'failed'
 
-export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
+export function ScoreScreen({ score, total, onReplay }: Props) {
   const { t } = useLang()
   const tier = t.tiers[tierFor(score, total)]
   const [status, setStatus] = useState<ShareStatus>('idle')
@@ -41,14 +37,14 @@ export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
         total,
         tierLabel: tier.label,
         tierLine: tier.line,
-        serieTitle: serie.title,
+        eyebrow: t.eyebrow,
         scoreLabel: t.yourScore,
         cta: t.shareCta,
       })
       const blob = await canvasToBlob(canvas)
       const outcome = await shareImage({
         blob,
-        filename: `gonet-geneva-open-${serie.id}-${score}-${total}.png`,
+        filename: `gonet-geneva-open-${score}-sur-${total}.png`,
         title: TOURNAMENT.name,
         text: `${tier.label} — ${format(t.outOf, { score, total })} · ${TOURNAMENT.url}`,
       })
@@ -59,7 +55,7 @@ export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
     } catch {
       if (alive.current) setStatus('failed')
     }
-  }, [status, score, total, tier, serie, t])
+  }, [status, score, total, tier, t])
 
   const shareLabel =
     status === 'busy'
@@ -82,22 +78,13 @@ export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
           >
             {shareLabel}
           </button>
-          <div className="flex gap-2.5">
-            <button
-              type="button"
-              onClick={onReplay}
-              className="min-h-[56px] flex-1 rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-3 text-[16px] font-extrabold text-[var(--c-on-brand-secondary)]"
-            >
-              {t.replay}
-            </button>
-            <button
-              type="button"
-              onClick={onMenu}
-              className="min-h-[56px] flex-1 rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-3 text-[16px] font-extrabold text-[var(--c-on-brand-secondary)]"
-            >
-              {t.otherSeries}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={onReplay}
+            className="min-h-[56px] w-full rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-5 text-[17px] font-extrabold text-[var(--c-on-brand-secondary)]"
+          >
+            {t.replay}
+          </button>
           {/* L'issue du partage est annoncée sans voler le focus. */}
           <p aria-live="polite" className="sr-only">
             {status === 'downloaded'
@@ -139,8 +126,11 @@ export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
           </p>
         </section>
 
-        <p className="mt-5 text-center text-[13px] font-semibold text-[var(--c-on-brand-secondary)]">
-          {serie.title}
+        <p
+          className="mt-5 text-center text-[12px] font-bold uppercase text-[var(--c-on-brand-secondary)]"
+          style={{ letterSpacing: 'var(--tracking-label)' }}
+        >
+          {t.eyebrow}
         </p>
       </div>
     </Shell>
