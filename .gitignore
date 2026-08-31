@@ -4,5 +4,7 @@ dist
 .DS_Store
 .vite
 
-# Cartes de partage générées pendant les tests
+# Cartes de partage et exports générés pendant les tests
 gonet-geneva-open-*.png
+carte-*.png
+test-*.png
