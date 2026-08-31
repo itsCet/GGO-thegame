@@ -29,6 +29,7 @@ export interface Strings {
   yourScore: string
   outOf: string // {score} {total}
   replay: string
+  menu: string
   share: string
   sharePreparing: string
   shareDownloaded: string
@@ -63,6 +64,7 @@ const fr: Strings = {
   yourScore: 'Ton score',
   outOf: '{score} sur {total}',
   replay: 'Rejouer',
+  menu: 'Menu',
   share: 'Partager',
   sharePreparing: 'Préparation…',
   shareDownloaded: 'Image enregistrée',
@@ -101,6 +103,7 @@ const en: Strings = {
   yourScore: 'Your score',
   outOf: '{score} out of {total}',
   replay: 'Play again',
+  menu: 'Menu',
   share: 'Share',
   sharePreparing: 'Preparing…',
   shareDownloaded: 'Image saved',

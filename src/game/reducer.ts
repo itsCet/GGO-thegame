@@ -43,6 +43,8 @@ export type GameAction =
     }
   | { type: 'next' }
   | { type: 'restart'; questionIds: string[] }
+  /** Retour à l'accueil depuis l'écran de fin. */
+  | { type: 'home' }
 
 /** Remet les compteurs à zéro sans toucher au runId. */
 function blank() {
@@ -99,6 +101,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         questionIds: action.questionIds,
         runId: state.runId + 1,
       }
+
+    case 'home':
+      return { ...state, ...blank(), phase: 'home', questionIds: [] }
 
     default:
       return state

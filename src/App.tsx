@@ -44,6 +44,7 @@ export default function App() {
   )
 
   const handleNext = useCallback(() => dispatch({ type: 'next' }), [])
+  const handleHome = useCallback(() => dispatch({ type: 'home' }), [])
 
   return (
     <>
@@ -77,6 +78,7 @@ export default function App() {
           score={state.score}
           total={state.questionIds.length}
           onReplay={handleReplay}
+          onMenu={handleHome}
         />
       )}
     </>

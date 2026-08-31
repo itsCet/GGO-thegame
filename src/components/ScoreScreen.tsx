@@ -11,11 +11,13 @@ interface Props {
   score: number
   total: number
   onReplay: () => void
+  /** Retour à l'accueil. */
+  onMenu: () => void
 }
 
 type ShareStatus = 'idle' | 'busy' | 'downloaded' | 'failed'
 
-export function ScoreScreen({ score, total, onReplay }: Props) {
+export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
   const { t } = useLang()
   const tier = t.tiers[tierFor(score, total)]
   const [status, setStatus] = useState<ShareStatus>('idle')
@@ -85,6 +87,13 @@ export function ScoreScreen({ score, total, onReplay }: Props) {
           >
             {t.replay}
           </button>
+          <button
+            type="button"
+            onClick={onMenu}
+            className="min-h-[56px] w-full rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-5 text-[17px] font-extrabold text-[var(--c-on-brand-secondary)]"
+          >
+            {t.menu}
+          </button>
           {/* L'issue du partage est annoncée sans voler le focus. */}
           <p aria-live="polite" className="sr-only">
             {status === 'downloaded'
@@ -125,13 +134,6 @@ export function ScoreScreen({ score, total, onReplay }: Props) {
             {tier.line}
           </p>
         </section>
-
-        <p
-          className="mt-5 text-center text-[12px] font-bold uppercase text-[var(--c-on-brand-secondary)]"
-          style={{ letterSpacing: 'var(--tracking-label)' }}
-        >
-          {t.eyebrow}
-        </p>
       </div>
     </Shell>
   )
