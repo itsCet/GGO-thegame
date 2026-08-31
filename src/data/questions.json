@@ -1,0 +1,92 @@
+{
+  "$comment": "Source unique du contenu éditorial. Aucune question n'est écrite en dur dans les composants. Pour publier une nouvelle série : ajouter une entrée dans `series` (published_at = date de publication) et 7 questions portant le même `serie`. La série affichée par défaut est la plus récente par published_at ; ?serie=<id> force une série précise.",
+  "series": [
+    {
+      "id": "finales",
+      "title_fr": "Les finales",
+      "title_en": "The finals",
+      "subtitle_fr": "Dix éditions, dix trophées soulevés au Parc des Eaux-Vives.",
+      "subtitle_en": "Ten editions, ten trophies lifted at Parc des Eaux-Vives.",
+      "published_at": "2025-05-19"
+    }
+  ],
+  "questions": [
+    {
+      "id": "finales-01",
+      "serie": "finales",
+      "question_fr": "Qui a remporté l'édition 2025 du Gonet Geneva Open ?",
+      "question_en": "Who won the 2025 Gonet Geneva Open?",
+      "options_fr": ["Novak Djokovic", "Casper Ruud", "Alexander Zverev", "Stan Wawrinka"],
+      "options_en": ["Novak Djokovic", "Casper Ruud", "Alexander Zverev", "Stan Wawrinka"],
+      "correct_index": 0,
+      "explication_fr": "Ce titre genevois est le 100e de la carrière de Djokovic.",
+      "explication_en": "That Geneva title was the 100th of Djokovic's career."
+    },
+    {
+      "id": "finales-02",
+      "serie": "finales",
+      "question_fr": "Quel joueur a gagné le plus de finales à Genève ?",
+      "question_en": "Which player has won the most finals in Geneva?",
+      "options_fr": ["Casper Ruud", "Stan Wawrinka", "Novak Djokovic", "Márton Fucsovics"],
+      "options_en": ["Casper Ruud", "Stan Wawrinka", "Novak Djokovic", "Márton Fucsovics"],
+      "correct_index": 0,
+      "explication_fr": "Trois trophées pour le Norvégien : 2021, 2022 et 2024.",
+      "explication_en": "Three trophies for the Norwegian: 2021, 2022 and 2024."
+    },
+    {
+      "id": "finales-03",
+      "serie": "finales",
+      "question_fr": "Combien de fois Stan Wawrinka a-t-il gagné le tournoi ?",
+      "question_en": "How many times has Stan Wawrinka won the tournament?",
+      "options_fr": ["Une fois", "Deux fois", "Trois fois", "Jamais"],
+      "options_en": ["Once", "Twice", "Three times", "Never"],
+      "correct_index": 1,
+      "explication_fr": "Le Vaudois s'est imposé devant son public en 2016 puis en 2017.",
+      "explication_en": "The Swiss won back-to-back home titles in 2016 and 2017."
+    },
+    {
+      "id": "finales-04",
+      "serie": "finales",
+      "question_fr": "Sur quelle surface la finale se joue-t-elle ?",
+      "question_en": "What surface is the final played on?",
+      "options_fr": ["Terre battue", "Dur extérieur", "Gazon", "Dur indoor"],
+      "options_en": ["Clay", "Outdoor hard", "Grass", "Indoor hard"],
+      "correct_index": 0,
+      "explication_fr": "De la terre battue, en plein air, une semaine avant Roland-Garros.",
+      "explication_en": "Outdoor clay, one week before Roland-Garros."
+    },
+    {
+      "id": "finales-05",
+      "serie": "finales",
+      "question_fr": "Dans quel parc genevois le trophée est-il soulevé ?",
+      "question_en": "In which Geneva park is the trophy lifted?",
+      "options_fr": ["Parc des Eaux-Vives", "Parc La Grange", "Parc des Bastions", "Parc Bertrand"],
+      "options_en": ["Parc des Eaux-Vives", "Parc La Grange", "Parc des Bastions", "Parc Bertrand"],
+      "correct_index": 0,
+      "explication_fr": "Le Tennis Club de Genève occupe le Parc des Eaux-Vives, face au lac.",
+      "explication_en": "Tennis Club de Genève sits in Parc des Eaux-Vives, facing the lake."
+    },
+    {
+      "id": "finales-06",
+      "serie": "finales",
+      "question_fr": "Quel joueur chilien a gagné la finale 2023 ?",
+      "question_en": "Which Chilean player won the 2023 final?",
+      "options_fr": ["Nicolás Jarry", "Cristian Garín", "Alejandro Tabilo", "Sebastián Báez"],
+      "options_en": ["Nicolás Jarry", "Cristian Garín", "Alejandro Tabilo", "Sebastián Báez"],
+      "correct_index": 0,
+      "explication_fr": "Jarry a décroché à Genève le plus beau titre de sa carrière.",
+      "explication_en": "Geneva handed Jarry the biggest title of his career."
+    },
+    {
+      "id": "finales-07",
+      "serie": "finales",
+      "question_fr": "Quel Grand Chelem démarre juste après la finale de Genève ?",
+      "question_en": "Which Grand Slam starts right after the Geneva final?",
+      "options_fr": ["Roland-Garros", "Wimbledon", "US Open", "Open d'Australie"],
+      "options_en": ["Roland-Garros", "Wimbledon", "US Open", "Australian Open"],
+      "correct_index": 0,
+      "explication_fr": "Le tournoi sert de dernière répétition sur terre avant Paris.",
+      "explication_en": "The tournament is the last clay rehearsal before Paris."
+    }
+  ]
+}

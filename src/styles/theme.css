@@ -1,0 +1,87 @@
+/* ============================================================================
+   THÈME — FICHIER UNIQUE DE BASCULE
+   ----------------------------------------------------------------------------
+   Charte Geneva Open :
+     PANTONE 166 C ....... #EA580C  orange
+     PANTONE 485 C ....... #DA291C  rouge
+     PANTONE Black 6 C ... #000413  noir
+
+   Tout se change ici, et nulle part ailleurs : aucune couleur n'est écrite en
+   dur dans les composants. La carte de partage (canvas) relit ces mêmes
+   variables au runtime via src/lib/theme.ts.
+
+   POURQUOI CE MAPPING — mesures WCAG de la charte :
+
+     blanc  sur noir   ....  20.4:1   AAA                     ✔
+     noir   sur orange ....  5.75:1   AA texte courant        ✔
+     orange sur noir   ....  5.75:1   AA texte courant        ✔
+     blanc  sur rouge  ....  4.87:1   AA texte courant        ✔
+     rouge  sur blanc  ....  4.87:1   AA texte courant        ✔
+     rouge  sur noir   ....  4.20:1   grand texte seulement
+     blanc  sur orange ....  3.56:1   grand texte seulement
+     orange sur rouge  ....  1.37:1   ÉCHOUE — jamais ensemble
+
+   Règles qui en découlent, appliquées partout dans l'app :
+
+   1. L'orange domine les fonds (c'est la charte du gabarit de partage), mais
+      LE BLANC N'Y TIENT QU'EN GRAND CORPS (≥ 24px, ou ≥ 19px gras). Titres et
+      chiffres en blanc ; texte courant en NOIR (--c-on-brand-secondary), qui
+      y monte à 5.75:1. D'où la bichromie blanc/noir sur les écrans orange.
+   2. Le rouge 485 C n'est jamais posé sur l'orange (1.37:1). Sa place est sur
+      les surfaces blanches, où il fait 4.87:1.
+   3. Les aplats d'action sont NOIRS : un aplat orange ou rouge ne se
+      détacherait pas d'une page orange.
+   ========================================================================== */
+
+:root {
+  /* --- Marque ------------------------------------------------------------ */
+  --c-brand: #ea580c;        /* 166 C — dominante, fonds pleins              */
+  --c-brand-deep: #000413;   /* Black 6 C — aplats, panneaux, boutons        */
+  --c-brand-soft: #da291c;   /* 485 C — accent, sur surfaces claires         */
+  --c-on-brand: #ffffff;     /* GRAND texte sur orange ; texte sur noir      */
+  --c-on-brand-secondary: var(--c-brand-deep); /* texte courant sur orange   */
+
+  /* --- Actions ------------------------------------------------------------ */
+  --c-cta: var(--c-brand-deep);
+  --c-cta-on: var(--c-on-brand);
+
+  /* --- Surfaces neutres --------------------------------------------------- */
+  --c-surface: #f7f7f8;
+  --c-surface-raised: #ffffff;
+  --c-ink: #000413;          /* 20.4:1 sur blanc                             */
+  --c-ink-muted: #5b5b63;    /*  6.7:1 sur blanc                             */
+  --c-line: #d8d8dc;
+
+  /* --- États de réponse ---------------------------------------------------
+     Jamais la couleur seule : chaque état porte aussi un glyphe (✓ / ✕).    */
+  --c-correct: var(--c-brand-deep);
+  --c-correct-on: var(--c-on-brand);
+  --c-wrong-line: #5b5b63;
+  --c-wrong-ink: #5b5b63;
+
+  /* --- Formes ------------------------------------------------------------- */
+  --r-card: 14px;
+  --r-pill: 999px;
+  --border-w: 2px;
+
+  /* --- Cible tactile minimale (spec : ≥ 48px) ----------------------------- */
+  --tap-min: 48px;
+
+  /* --- Typographie -------------------------------------------------------- */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --tracking-label: 0.14em;
+
+  /* --- Mouvement ----------------------------------------------------------
+     Neutralisé plus bas si prefers-reduced-motion.                          */
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+  }
+}
