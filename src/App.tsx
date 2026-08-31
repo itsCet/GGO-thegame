@@ -1,24 +1,42 @@
 import { useCallback, useMemo, useReducer } from 'react'
 import { HomeScreen } from './components/HomeScreen'
+import { MenuScreen } from './components/MenuScreen'
 import { QuestionScreen } from './components/QuestionScreen'
 import { ScoreScreen } from './components/ScoreScreen'
 import { gameReducer, initGame } from './game/reducer'
 import { useLang } from './i18n/LanguageContext'
-import { resolveSerie, serieIdFromUrl } from './lib/series'
+import { getSerie, listSeries, questionCount, serieIdFromUrl } from './lib/series'
+import type { Serie } from './types'
 
 export default function App() {
   const { lang, t } = useLang()
 
   // La série demandée est lue une seule fois : l'app est mono-page, l'URL ne
-  // change pas en cours de partie.
-  const requestedSerie = useMemo(() => serieIdFromUrl(), [])
-  const serie = useMemo(() => resolveSerie(lang, requestedSerie), [lang, requestedSerie])
+  // change pas en cours de partie. Un identifiant inconnu ouvre le menu.
+  const initial = useMemo(() => {
+    const requested = serieIdFromUrl()
+    const known = requested && questionCount(requested) > 0 ? requested : null
+    return { serieId: known, total: known ? questionCount(known) : 0 }
+  }, [])
 
   // Un seul reducer pour tout l'état de jeu. Changer de langue ne le touche
   // pas : la partie en cours continue, traduite à la volée.
-  const [state, dispatch] = useReducer(gameReducer, serie.questions.length, initGame)
+  const [state, dispatch] = useReducer(gameReducer, initial, initGame)
 
-  const question = serie.questions[state.index]
+  const series = useMemo(() => listSeries(lang), [lang])
+  const serie = useMemo(() => getSerie(lang, state.serieId), [lang, state.serieId])
+  const question = serie?.questions[state.index]
+
+  // Ouvert sur un lien direct : pas de menu derrière, donc pas de retour.
+  const cameFromLink = initial.serieId !== null
+
+  const handleSelect = useCallback((picked: Serie) => {
+    dispatch({
+      type: 'selectSerie',
+      serieId: picked.id,
+      total: picked.questions.length,
+    })
+  }, [])
 
   const handleAnswer = useCallback(
     (selected: number | null) => {
@@ -34,6 +52,7 @@ export default function App() {
   )
 
   const handleNext = useCallback(() => dispatch({ type: 'next' }), [])
+  const handleMenu = useCallback(() => dispatch({ type: 'menu' }), [])
 
   return (
     <>
@@ -44,8 +63,16 @@ export default function App() {
         {t.skipToContent}
       </a>
 
-      {state.phase === 'home' && (
-        <HomeScreen serie={serie} onStart={() => dispatch({ type: 'start' })} />
+      {state.phase === 'menu' && (
+        <MenuScreen series={series} onSelect={handleSelect} />
+      )}
+
+      {state.phase === 'home' && serie && (
+        <HomeScreen
+          serie={serie}
+          onStart={() => dispatch({ type: 'start' })}
+          onBack={cameFromLink ? undefined : handleMenu}
+        />
       )}
 
       {(state.phase === 'playing' || state.phase === 'feedback') && question && (
@@ -64,12 +91,13 @@ export default function App() {
         />
       )}
 
-      {state.phase === 'score' && (
+      {state.phase === 'score' && serie && (
         <ScoreScreen
           score={state.score}
           total={state.total}
           serie={serie}
           onReplay={() => dispatch({ type: 'restart' })}
+          onMenu={handleMenu}
         />
       )}
     </>

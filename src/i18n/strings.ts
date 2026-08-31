@@ -8,6 +8,14 @@ export interface Strings {
   switchTo: string
   skipToContent: string
 
+  /* Menu */
+  menuTitle: string
+  menuLead: string
+  badgeNew: string
+  serieMeta: string // {n}
+  allSeries: string
+  otherSeries: string
+
   /* Accueil */
   eyebrow: string
   questionCount: string // {n}
@@ -42,6 +50,13 @@ const fr: Strings = {
   langName: 'Français',
   switchTo: 'Switch to English',
   skipToContent: 'Aller au contenu',
+
+  menuTitle: 'Choisis ta série',
+  menuLead: 'Sept questions, dix secondes chacune.',
+  badgeNew: 'Nouveau',
+  serieMeta: '{n} questions',
+  allSeries: 'Toutes les séries',
+  otherSeries: 'Autres séries',
 
   eyebrow: 'ATP 250 · Genève · Terre battue',
   questionCount: '{n} questions',
@@ -78,6 +93,13 @@ const en: Strings = {
   langName: 'English',
   switchTo: 'Passer en français',
   skipToContent: 'Skip to content',
+
+  menuTitle: 'Pick a series',
+  menuLead: 'Seven questions, ten seconds each.',
+  badgeNew: 'New',
+  serieMeta: '{n} questions',
+  allSeries: 'All series',
+  otherSeries: 'Other series',
 
   eyebrow: 'ATP 250 · Geneva · Clay',
   questionCount: '{n} questions',

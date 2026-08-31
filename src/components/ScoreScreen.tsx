@@ -6,19 +6,20 @@ import { tierFor } from '../lib/score'
 import { shareImage } from '../lib/share'
 import { canvasToBlob, renderShareCard } from '../lib/shareCard'
 import type { Serie } from '../types'
-import { LanguageSwitch } from './LanguageSwitch'
-import { Wordmark } from './Wordmark'
+import { Shell } from './Shell'
 
 interface Props {
   score: number
   total: number
   serie: Serie
   onReplay: () => void
+  /** Retour au menu des séries. */
+  onMenu: () => void
 }
 
 type ShareStatus = 'idle' | 'busy' | 'downloaded' | 'failed'
 
-export function ScoreScreen({ score, total, serie, onReplay }: Props) {
+export function ScoreScreen({ score, total, serie, onReplay, onMenu }: Props) {
   const { t } = useLang()
   const tier = t.tiers[tierFor(score, total)]
   const [status, setStatus] = useState<ShareStatus>('idle')
@@ -70,13 +71,45 @@ export function ScoreScreen({ score, total, serie, onReplay }: Props) {
           : t.share
 
   return (
-    <div className="flex min-h-dvh flex-col bg-[var(--c-brand)] text-[var(--c-on-brand)]">
-      <header className="flex items-center justify-between gap-3 px-5 pt-5">
-        <Wordmark />
-        <LanguageSwitch />
-      </header>
-
-      <main id="content" className="flex flex-1 flex-col justify-center px-5 py-8">
+    <Shell
+      footer={
+        <div className="flex flex-col gap-2.5">
+          <button
+            type="button"
+            onClick={handleShare}
+            aria-busy={status === 'busy'}
+            className="min-h-[56px] w-full rounded-[var(--r-card)] bg-[var(--c-cta)] px-5 text-[17px] font-extrabold text-[var(--c-cta-on)]"
+          >
+            {shareLabel}
+          </button>
+          <div className="flex gap-2.5">
+            <button
+              type="button"
+              onClick={onReplay}
+              className="min-h-[56px] flex-1 rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-3 text-[16px] font-extrabold text-[var(--c-on-brand-secondary)]"
+            >
+              {t.replay}
+            </button>
+            <button
+              type="button"
+              onClick={onMenu}
+              className="min-h-[56px] flex-1 rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-3 text-[16px] font-extrabold text-[var(--c-on-brand-secondary)]"
+            >
+              {t.otherSeries}
+            </button>
+          </div>
+          {/* L'issue du partage est annoncée sans voler le focus. */}
+          <p aria-live="polite" className="sr-only">
+            {status === 'downloaded'
+              ? t.shareDownloaded
+              : status === 'failed'
+                ? t.shareFailed
+                : ''}
+          </p>
+        </div>
+      }
+    >
+      <div className="flex flex-1 flex-col justify-center py-2">
         <section className="rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
           <h1
             className="text-[13px] font-bold uppercase"
@@ -109,29 +142,7 @@ export function ScoreScreen({ score, total, serie, onReplay }: Props) {
         <p className="mt-5 text-center text-[13px] font-semibold text-[var(--c-on-brand-secondary)]">
           {serie.title}
         </p>
-      </main>
-
-      <footer className="flex flex-col gap-2.5 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-        <button
-          type="button"
-          onClick={handleShare}
-          aria-busy={status === 'busy'}
-          className="min-h-[56px] w-full rounded-[var(--r-card)] bg-[var(--c-cta)] px-5 text-[17px] font-extrabold text-[var(--c-cta-on)]"
-        >
-          {shareLabel}
-        </button>
-        <button
-          type="button"
-          onClick={onReplay}
-          className="min-h-[56px] w-full rounded-[var(--r-card)] border-[length:var(--border-w)] border-[var(--c-on-brand-secondary)] px-5 text-[17px] font-extrabold text-[var(--c-on-brand-secondary)]"
-        >
-          {t.replay}
-        </button>
-        {/* L'issue du partage est annoncée sans voler le focus. */}
-        <p aria-live="polite" className="sr-only">
-          {status === 'downloaded' ? t.shareDownloaded : status === 'failed' ? t.shareFailed : ''}
-        </p>
-      </footer>
-    </div>
+      </div>
+    </Shell>
   )
 }

@@ -1,9 +1,9 @@
 /**
  * Tout l'état du jeu vit ici. Les composants ne détiennent que de l'état
- * d'affichage local (aucun score, aucun index, aucune sélection ailleurs).
+ * d'affichage (aucun score, aucun index, aucune sélection ailleurs).
  */
 
-export type Phase = 'home' | 'playing' | 'feedback' | 'score'
+export type Phase = 'menu' | 'home' | 'playing' | 'feedback' | 'score'
 
 /** Trace d'une réponse. Conservée en mémoire uniquement (pas de localStorage). */
 export interface AnswerRecord {
@@ -15,6 +15,8 @@ export interface AnswerRecord {
 
 export interface GameState {
   phase: Phase
+  /** Série en cours ; null au menu. */
+  serieId: string | null
   /** Index de la question courante. */
   index: number
   score: number
@@ -22,12 +24,14 @@ export interface GameState {
   selected: number | null
   timedOut: boolean
   answers: AnswerRecord[]
+  /** Nombre de questions de la série en cours. */
   total: number
   /** Incrémenté à chaque partie : sert de clé de remontage au chrono. */
   runId: number
 }
 
 export type GameAction =
+  | { type: 'selectSerie'; serieId: string; total: number }
   | { type: 'start' }
   | {
       type: 'answer'
@@ -38,22 +42,43 @@ export type GameAction =
     }
   | { type: 'next' }
   | { type: 'restart' }
+  | { type: 'menu' }
 
-export function initGame(total: number): GameState {
+export interface GameInit {
+  /** Série demandée par l'URL, ou null pour démarrer au menu. */
+  serieId: string | null
+  total: number
+}
+
+/** Remet les compteurs à zéro sans toucher à la série ni au runId. */
+function blank() {
+  return { index: 0, score: 0, selected: null, timedOut: false, answers: [] }
+}
+
+export function initGame({ serieId, total }: GameInit): GameState {
   return {
-    phase: 'home',
-    index: 0,
-    score: 0,
-    selected: null,
-    timedOut: false,
-    answers: [],
+    // Un lien ?serie=… atterrit directement sur la présentation de la série ;
+    // sans paramètre, on ouvre le menu.
+    phase: serieId ? 'home' : 'menu',
+    serieId,
     total,
     runId: 0,
+    ...blank(),
   }
 }
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
+    case 'selectSerie':
+      return {
+        ...state,
+        ...blank(),
+        phase: 'home',
+        serieId: action.serieId,
+        total: action.total,
+        runId: state.runId + 1,
+      }
+
     case 'start':
       if (state.phase !== 'home') return state
       return { ...state, phase: 'playing' }
@@ -84,7 +109,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case 'restart':
-      return { ...initGame(state.total), phase: 'playing', runId: state.runId + 1 }
+      return { ...state, ...blank(), phase: 'playing', runId: state.runId + 1 }
+
+    case 'menu':
+      return { ...state, ...blank(), phase: 'menu', serieId: null, total: 0 }
 
     default:
       return state

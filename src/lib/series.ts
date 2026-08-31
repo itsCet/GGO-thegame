@@ -26,7 +26,7 @@ function localizeSerie(s: RawSerie, lang: Lang): Serie {
   }
 }
 
-/** Séries publiées, de la plus récente à la plus ancienne. */
+/** Séries brutes, de la plus récente à la plus ancienne. */
 function publishedDesc(): RawSerie[] {
   return [...file.series].sort((a, b) => b.published_at.localeCompare(a.published_at))
 }
@@ -36,19 +36,26 @@ export function serieIdFromUrl(search: string = window.location.search): string 
   return new URLSearchParams(search).get(SERIE_PARAM)
 }
 
-/**
- * Résout la série à jouer : celle demandée par l'URL si elle existe,
- * sinon la dernière publiée. Lève si le fichier de données est vide.
- */
-export function resolveSerie(lang: Lang, requestedId: string | null): Serie {
-  const ordered = publishedDesc()
-  const first = ordered[0]
-  if (!first) throw new Error('questions.json ne contient aucune série')
-  const match = requestedId ? ordered.find((s) => s.id === requestedId) : undefined
-  return localizeSerie(match ?? first, lang)
+/** Toutes les séries, la plus récente en tête — l'ordre du menu. */
+export function listSeries(lang: Lang): Serie[] {
+  return publishedDesc().map((s) => localizeSerie(s, lang))
 }
 
-/** Liste des identifiants de séries — utile pour un futur sélecteur. */
-export function serieIds(): string[] {
-  return publishedDesc().map((s) => s.id)
+/** Une série par identifiant, ou null si l'identifiant est inconnu. */
+export function getSerie(lang: Lang, id: string | null): Serie | null {
+  if (!id) return null
+  const found = publishedDesc().find((s) => s.id === id)
+  return found ? localizeSerie(found, lang) : null
+}
+
+/** Nombre de questions d'une série, sans avoir à la localiser. */
+export function questionCount(id: string): number {
+  return file.questions.filter((q) => q.serie === id).length
+}
+
+/** Identifiant de la série la plus récemment publiée. */
+export function latestSerieId(): string {
+  const first = publishedDesc()[0]
+  if (!first) throw new Error('questions.json ne contient aucune série')
+  return first.id
 }

@@ -46,9 +46,9 @@ question n'est écrite en dur dans un composant.
 }
 ```
 
-3. Redéployer. La série affichée par défaut est **la plus récente par
-   `published_at`**. `?serie=records` force une série précise ; un identifiant
-   inconnu retombe silencieusement sur la dernière publiée.
+3. Redéployer. La nouvelle série apparaît en tête du menu, marquée « Nouveau »,
+   parce que le menu est trié par `published_at` décroissant. `?serie=records`
+   ouvre directement sa présentation ; un identifiant inconnu ouvre le menu.
 
 **Écart assumé par rapport au brief :** le brief décrivait `options[4]`. Comme
 l'app est bilingue, le champ est dédoublé en `options_fr` / `options_en`, ce qui
@@ -101,6 +101,42 @@ Un `theme.css` de rechange se substitue à celui-ci sans toucher au reste.
 
 ---
 
+## Le gabarit officiel dans l'app
+
+`design/the-game.svg` sert deux fois : en fond de la carte de partage, et comme
+habillage des écrans.
+
+Pour les écrans, le gabarit **n'est pas posé en image de fond**. Il fait
+1080 × 1920 (ratio 0,5625) alors qu'un téléphone courant est en 0,46 : le
+recadrer rognerait le lockup sur les côtés, l'étirer le déformerait de 22 %
+en hauteur. Ses deux blocs sont donc découpés et servis séparément :
+
+| Fichier | Contenu | Taille |
+| --- | --- | --- |
+| `public/lockup.webp` | « QUIZ GAME » + « GONET GENEVA OPEN » | 826 × 202, 33 ko |
+| `public/logos.webp` | Logos Gonet Geneva Open + ATP 250 | 296 × 138, 12 ko |
+
+Les deux sont en WebP **sans perte, à fond transparent**, posés sur l'aplat
+orange du thème — le même `#EA580C` que celui du gabarit, donc sans raccord
+visible à n'importe quelle hauteur d'écran. `src/components/Shell.tsx` les
+place en tête et en pied ; le menu, la présentation d'une série et l'écran de
+fin partagent ce cadre. L'écran de question ne l'utilise pas : il lui faut
+toute la hauteur pour l'énoncé, les quatre réponses et le feedback.
+
+### Comment les découpes ont été obtenues
+
+Le SVG n'emploie que trois teintes (`#ffffff`, `#ea580c`, `#000000`) : le fond
+est un aplat plat, plus deux images de halo, et l'habillage est du blanc pur.
+En retirant les deux `<rect>` de fond et les deux groupes de halo, le rendu
+donne directement l'habillage avec son canal alpha — pas de détourage manuel,
+pas de seuillage approximatif.
+
+**Si le studio livre un nouveau gabarit :** rejouer ce découpage plutôt que de
+retoucher les WebP à la main, et vérifier au passage que la zone libre de la
+carte de partage n'a pas bougé.
+
+---
+
 ## La carte de partage
 
 `src/lib/shareCard.ts` — 1080 × 1920, générée en canvas côté client, puis
@@ -147,12 +183,17 @@ src/
     strings.ts             Dictionnaire FR/EN + paliers de score
     LanguageContext.tsx    Détection navigateur + switch manuel persisté
   lib/
-    series.ts              Résolution de la série (?serie=… / dernière publiée)
+    series.ts              Liste des séries, résolution de ?serie=…
     score.ts               Palier atteint, exprimé en proportion
     shareCard.ts           Composition canvas 1080 × 1920
     share.ts               Web Share API + repli téléchargement
     theme.ts               Lecture des tokens CSS au runtime (pour le canvas)
-  components/              Accueil, Question, Score et leurs briques
+  components/
+    Shell.tsx              Cadre de marque : lockup en tête, logos en pied
+    MenuScreen.tsx         Choix de la série
+    HomeScreen.tsx         Présentation d'une série
+    QuestionScreen.tsx     Énoncé, réponses, chrono, feedback
+    ScoreScreen.tsx        Écran de fin + partage
   styles/theme.css         ← LE fichier de charte
 ```
 
@@ -183,11 +224,12 @@ src/
 
 | | Brut | Gzip (transféré) |
 | --- | --- | --- |
-| JS | 231 ko | **72 ko** |
-| CSS | 15 ko | 4 ko |
-| Fond de carte (à la demande) | — | 72 ko |
+| JS | 233 ko | **73 ko** |
+| CSS | 16 ko | 4 ko |
+| Habillage (lockup + logos) | — | 45 ko |
+| Fond de carte (au partage seulement) | — | 72 ko |
 
-Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les 28 questions pèsent ~32 ko.
+Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les 28 questions pèsent ~34 ko.
 La cible de 150 ko est tenue en transféré, pas en brut.
 
 Pour descendre sous 150 ko **bruts**, aliaser React vers `preact/compat` —
@@ -222,8 +264,25 @@ récente par `published_at` — aujourd'hui `edition-2026`.
 | `tournoi` | Le tournoi | 2025-11-10 | Histoire, lieu, format, sponsor |
 | `finales` | Les finales | 2025-05-19 | Les finales et leur contexte |
 
-Liens directs : `?serie=champions`, `?serie=tournoi`, `?serie=finales`.
-Un identifiant inconnu retombe silencieusement sur la série la plus récente.
+Liens directs : `?serie=champions`, `?serie=tournoi`, `?serie=finales` — ils
+ouvrent la présentation de la série, sans passer par le menu, et masquent alors
+le lien « Toutes les séries » puisqu'il n'y a pas de menu derrière. Un
+identifiant inconnu ouvre le menu.
+
+### Parcours
+
+```
+                    ?serie=…
+                       │
+                       ▼
+  Menu ──────────► Présentation ──────► 7 questions ──────► Écran de fin
+ (choix de          (Jouer)              (10 s chacune)       (score, partage)
+  la série)                                                       │
+     ▲                                                            │
+     └──────────────────── « Autres séries » ─────────────────────┘
+
+  « Rejouer » relance la même série depuis la question 1.
+```
 
 La bonne réponse est répartie sur les quatre positions (7 / 9 / 7 / 5 sur les
 28 questions) : pas de biais exploitable en cliquant toujours au même endroit.
