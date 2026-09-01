@@ -161,6 +161,42 @@ carte de partage n'a pas bougé.
 
 ---
 
+## Le tracé de court
+
+`src/components/CourtLines.tsx` — un SVG posé derrière le contenu de l'accueil,
+de l'écran de question et du panneau de score, pour donner de la matière aux
+grands aplats orange.
+
+Aux proportions réelles : le viewBox est en centimètres, 1097 × 2377, soit les
+10,97 × 23,77 m d'un court de double. Couloirs de simple à 1,37 m des lignes de
+double, lignes de service à 6,40 m du filet. Le tracé est volontairement plus
+large que l'écran (130 %) : on n'en voit qu'un recadrage, ce qui le fait lire
+comme une texture et non comme un pictogramme.
+
+**En SVG, pas en image** : ~1 ko, net à toutes les tailles, couleur et opacité
+pilotées par le thème via `currentColor`. Décoratif, donc `aria-hidden`.
+
+### L'opacité est mesurée, pas choisie à l'œil
+
+Les filets blancs éclaircissent localement l'orange, et le blanc n'y tient déjà
+que 3.56:1. Ce que ça donne, mesuré :
+
+| Opacité | Blanc sur le filet | Noir sur le filet |
+| --- | --- | --- |
+| 0.08 | 3.26 | 6.28 |
+| **0.10** | **3.18** | **6.43** |
+| 0.12 | 3.10 | 6.59 |
+| 0.16 | **2.96 — sous le seuil** | 6.92 |
+
+Le défaut est donc à **0.10**, et il ne faut pas dépasser 0.12 sur un fond
+orange : à 0.16 le grand texte blanc passe sous les 3:1 réglementaires. Le
+texte courant, lui, est en noir et y gagne au contraire un peu de contraste.
+
+Sur le panneau de score, le fond est noir et le blanc y dispose de 20:1 : le
+tracé y est monté à 0.16 sans aucun risque.
+
+---
+
 ## La carte de partage
 
 `src/lib/shareCard.ts` — 1080 × 1920, générée en canvas côté client, puis passée
@@ -209,6 +245,7 @@ src/
     theme.ts               Lecture des tokens CSS au runtime (pour le canvas)
   components/
     Shell.tsx              Cadre de marque : lockup en tête, logos en pied
+    CourtLines.tsx         Tracé de court en filigrane, derrière le contenu
     HomeScreen.tsx         Accueil, bouton Jouer
     QuestionScreen.tsx     Énoncé, réponses, chrono, feedback
     ScoreScreen.tsx        Écran de fin + partage

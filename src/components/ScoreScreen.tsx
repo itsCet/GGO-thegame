@@ -5,6 +5,7 @@ import { format } from '../i18n/strings'
 import { tierFor } from '../lib/score'
 import { shareImage } from '../lib/share'
 import { canvasToBlob, renderShareCard } from '../lib/shareCard'
+import { CourtLines } from './CourtLines'
 import { Shell } from './Shell'
 
 interface Props {
@@ -106,15 +107,16 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
       }
     >
       <div className="flex flex-1 flex-col justify-center py-2">
-        <section className="rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
+        <section className="relative overflow-hidden rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
+          <CourtLines opacity={0.16} width="150%" />
           <h1
-            className="text-[13px] font-bold uppercase"
+            className="relative text-[13px] font-bold uppercase"
             style={{ letterSpacing: 'var(--tracking-label)' }}
           >
             {t.yourScore}
           </h1>
 
-          <p className="mt-3 flex items-baseline justify-center gap-1 leading-none">
+          <p className="relative mt-3 flex items-baseline justify-center gap-1 leading-none">
             <span className="text-[86px] font-extrabold tabular-nums tracking-tight">
               {score}
             </span>
@@ -125,12 +127,12 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
             <span className="sr-only">{format(t.outOf, { score, total })}</span>
           </p>
 
-          <hr className="mx-auto mt-7 w-10 border-0 border-t-2 border-[color-mix(in_srgb,var(--c-on-brand)_40%,transparent)]" />
+          <hr className="relative mx-auto mt-7 w-10 border-0 border-t-2 border-[color-mix(in_srgb,var(--c-on-brand)_40%,transparent)]" />
 
-          <p className="mt-6 text-[26px] leading-tight font-extrabold text-balance">
+          <p className="relative mt-6 text-[26px] leading-tight font-extrabold text-balance">
             {tier.label}
           </p>
-          <p className="mt-2 text-[15px] leading-snug font-medium text-balance">
+          <p className="relative mt-2 text-[15px] leading-snug font-medium text-balance">
             {tier.line}
           </p>
         </section>

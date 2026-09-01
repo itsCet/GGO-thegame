@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { TOURNAMENT } from '../config'
+import { CourtLines } from './CourtLines'
 import { LanguageSwitch } from './LanguageSwitch'
 
 interface Props {
@@ -23,7 +24,9 @@ interface Props {
  */
 export function Shell({ children, footer }: Props) {
   return (
-    <div className="flex min-h-dvh flex-col bg-[var(--c-brand)] text-[var(--c-on-brand)]">
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-[var(--c-brand)] text-[var(--c-on-brand)]">
+      <CourtLines />
+
       <header className="relative px-5 pt-7">
         <img
           src="/lockup.webp"
@@ -37,13 +40,13 @@ export function Shell({ children, footer }: Props) {
         </div>
       </header>
 
-      <main id="content" className="flex flex-1 flex-col px-5 pt-9">
+      <main id="content" className="relative flex flex-1 flex-col px-5 pt-9">
         {children}
       </main>
 
-      {footer && <div className="px-5 pt-6">{footer}</div>}
+      {footer && <div className="relative px-5 pt-6">{footer}</div>}
 
-      <footer className="px-5 pt-8 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+      <footer className="relative px-5 pt-8 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
         <img
           src="/logos.webp"
           alt="Gonet Geneva Open · ATP 250"
