@@ -209,8 +209,30 @@ Redimensionner la source en 810 × 1440, appliquer un aplat `rgba(0,4,19,0.58)`
 par-dessus, exporter en WebP qualité 0,65. Si la photo change, refaire la
 mesure du pire pixel : une image plus claire demandera un voile plus fort.
 
-L'écran de question et l'écran de fin restent sur l'aplat orange. Les charger
-de photo nuirait à la lecture des réponses et du score.
+### L'écran de fin aussi
+
+Même image, avec un voile CSS supplémentaire de 0,18 par-dessus le voile cuit :
+le fond y est plus calme, le panneau de score s'en détache. Zéro octet de plus,
+c'est le même fichier.
+
+Mesuré sur le rendu : bouton blanc 7,61 de contraste de bord, contours Rejouer
+8,24 et Menu 9,17 — tous très au-dessus des 3:1 exigés. Le panneau noir, lui,
+n'est qu'à **2,81** contre les zones les plus claires de la photo. C'est sous le
+seuil, mais ce panneau n'est pas un composant d'interface : c'est un cadre
+décoratif autour d'un texte déjà à 20:1. Un filet blanc à 32 % en marque le bord.
+
+**L'écran de question reste sur l'aplat orange** : quatre cartes de réponse et
+un bloc de feedback par-dessus une photo nuiraient à la lecture.
+
+### La composition de l'écran de question
+
+Le bloc énoncé + réponses est **centré verticalement**, pas collé en haut. Il
+restait sinon 250 px morts sous les réponses. Un premier essai plaçait les
+réponses en bas, dans la zone du pouce : le vide se déplaçait simplement au
+milieu et l'énoncé se retrouvait orphelin en haut — abandonné.
+
+Les 96 px sous les réponses ne sont pas perdus : ils sont réservés au bloc de
+feedback, qui vient les occuper à la sélection sans rien faire sauter.
 
 ---
 

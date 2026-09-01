@@ -70,6 +70,8 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
 
   return (
     <Shell
+      photo
+      photoDim={0.18}
       footer={
         <div className="flex flex-col gap-2.5">
           <button
@@ -106,7 +108,7 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
       }
     >
       <div className="flex flex-1 flex-col justify-center py-2">
-        <section className="rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
+        <section className="rounded-[var(--r-card)] border border-[color-mix(in_srgb,var(--c-on-brand)_32%,transparent)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
           <h1
             className="relative text-[13px] font-bold uppercase"
             style={{ letterSpacing: 'var(--tracking-label)' }}

@@ -114,7 +114,7 @@ export function QuestionScreen({
         </div>
       </header>
 
-      <main id="content" className="relative flex flex-1 flex-col px-5 pt-8">
+      <main id="content" className="flex flex-1 flex-col justify-center px-5 py-6">
         <h1
           ref={headingRef}
           tabIndex={-1}

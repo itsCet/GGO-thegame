@@ -12,6 +12,12 @@ interface Props {
    * texte restent sur l'aplat.
    */
   photo?: boolean
+  /**
+   * Voile sombre supplementaire par-dessus la photo, de 0 a 1. La photo porte
+   * deja son voile cuit a 0.58 ; celui-ci s'y ajoute en CSS pour les ecrans qui
+   * demandent un fond plus calme.
+   */
+  photoDim?: number
 }
 
 /**
@@ -45,7 +51,7 @@ const PHOTO_TOKENS = {
  * L'écran de question n'utilise pas ce cadre : il lui faut toute la hauteur
  * pour l'énoncé, les quatre réponses et le feedback.
  */
-export function Shell({ children, footer, photo = false }: Props) {
+export function Shell({ children, footer, photo = false, photoDim = 0 }: Props) {
   return (
     <div
       className={`relative flex min-h-dvh flex-col overflow-hidden text-[var(--c-on-brand)] ${
@@ -64,6 +70,14 @@ export function Shell({ children, footer, photo = false }: Props) {
           width={810}
           height={1440}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+
+      {photo && photoDim > 0 && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{ backgroundColor: 'var(--c-brand-deep)', opacity: photoDim }}
         />
       )}
 
