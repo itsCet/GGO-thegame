@@ -15,7 +15,7 @@ npm run preview
 ## Le contenu
 
 **Un seul pool, dans `src/data/questions.json`.** Pas de séries, pas de
-catégories : 28 questions à plat, dont **7 sont tirées au hasard à chaque
+catégories : 78 questions à plat, dont **7 sont tirées au hasard à chaque
 partie**. Rejouer redonne un tirage différent.
 
 Aucune question n'est écrite en dur dans un composant.
@@ -27,7 +27,7 @@ Copier un bloc, lui donner un `id` libre mais unique, et vérifier que
 
 ```json
 {
-  "id": "q29",
+  "id": "q79",
   "question_fr": "…",
   "question_en": "…",
   "options_fr": ["…", "…", "…", "…"],
@@ -43,7 +43,7 @@ Rien d'autre à toucher : l'accueil lit la taille du pool, et le tirage s'adapte
 **Deux points de vigilance éditoriale :**
 
 1. **Répartir les bonnes réponses** sur les quatre positions. Le pool est
-   aujourd'hui à 7 / 9 / 7 / 5 pour A / B / C / D. Si tout se masse en A, le jeu
+   aujourd'hui à 18 / 23 / 20 / 17 pour A / B / C / D. Si tout se masse en A, le jeu
    se gagne en cliquant toujours en haut.
 2. **Laisser dans leur ordre naturel** les listes qui en ont un — années,
    nombres, stades de la compétition. Les mélanger déroute plus que ça n'égalise.
@@ -59,10 +59,10 @@ suit la convention des autres champs (`question_fr` / `question_en`).
 
 ## Sources du contenu
 
-Les 28 questions sont adossées à des sources publiques, vérifiées à la
+Les 78 questions sont adossées à des sources publiques, vérifiées à la
 rédaction (août 2026) :
 
-- Palmarès complet, catégories successives, records :
+- Palmarès de l'ère ATP 250, format, records du tournoi :
   [Geneva Open — Wikipedia](https://en.wikipedia.org/wiki/Geneva_Open)
 - Édition 2026 (dates, format, têtes de série, invitations, finales) :
   [2026 Geneva Open — Wikipedia](https://en.wikipedia.org/wiki/2026_Geneva_Open)
@@ -192,7 +192,7 @@ faire échouer le partage.
 
 ```
 src/
-  data/questions.json      Le pool éditorial — 28 questions à plat
+  data/questions.json      Le pool éditorial — 78 questions à plat
   config.ts                Questions par partie, chronos, identité du tournoi
   types.ts                 Formes du JSON + vue localisée
   game/
@@ -263,7 +263,7 @@ src/
 | Fond de carte (au partage seulement) | — | 72 ko |
 
 Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les
-28 questions pèsent ~30 ko. La cible de 150 ko est tenue en transféré, pas en
+78 questions pèsent ~48 ko. La cible de 150 ko est tenue en transféré, pas en
 brut.
 
 Pour descendre sous 150 ko **bruts**, aliaser React vers `preact/compat` —

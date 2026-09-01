@@ -560,6 +560,1006 @@
       "correct_index": 1,
       "explication_fr": "Le tournoi sert de dernière répétition sur terre avant Paris.",
       "explication_en": "The tournament is the last clay rehearsal before Paris."
+    },
+    {
+      "id": "q29",
+      "question_fr": "Qui détient le record de titres en double à Genève ?",
+      "question_en": "Who holds the record for doubles titles in Geneva?",
+      "options_fr": [
+        "Michael Venus",
+        "Oliver Marach",
+        "Juan Sebastián Cabal",
+        "Mate Pavić"
+      ],
+      "options_en": [
+        "Michael Venus",
+        "Oliver Marach",
+        "Juan Sebastián Cabal",
+        "Mate Pavić"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Le Croate a gagné le double genevois avec trois partenaires différents.",
+      "explication_en": "The Croat has won the Geneva doubles with three different partners."
+    },
+    {
+      "id": "q30",
+      "question_fr": "Combien de fois Mate Pavić a-t-il gagné le double à Genève ?",
+      "question_en": "How many times has Mate Pavić won the Geneva doubles?",
+      "options_fr": [
+        "Deux",
+        "Trois",
+        "Quatre",
+        "Cinq"
+      ],
+      "options_en": [
+        "Twice",
+        "Three times",
+        "Four times",
+        "Five times"
+      ],
+      "correct_index": 2,
+      "explication_fr": "2018, 2019, 2022 et 2024 : un record du tournoi.",
+      "explication_en": "2018, 2019, 2022 and 2024 — a tournament record."
+    },
+    {
+      "id": "q31",
+      "question_fr": "Avec quel partenaire Mate Pavić a-t-il gagné ses deux premiers doubles genevois ?",
+      "question_en": "With which partner did Mate Pavić win his first two Geneva doubles titles?",
+      "options_fr": [
+        "Nikola Mektić",
+        "Oliver Marach",
+        "Marcelo Arévalo",
+        "Rajeev Ram"
+      ],
+      "options_en": [
+        "Nikola Mektić",
+        "Oliver Marach",
+        "Marcelo Arévalo",
+        "Rajeev Ram"
+      ],
+      "correct_index": 1,
+      "explication_fr": "L'Autrichien et le Croate se sont imposés en 2018 puis en 2019.",
+      "explication_en": "The Austrian and the Croat won in 2018 and again in 2019."
+    },
+    {
+      "id": "q32",
+      "question_fr": "Quelle paire colombienne a gagné le premier double de l'ère ATP 250, en 2015 ?",
+      "question_en": "Which Colombian pair won the first doubles title of the ATP 250 era, in 2015?",
+      "options_fr": [
+        "Steve Johnson et Sam Querrey",
+        "Jean-Julien Rojer et Horia Tecău",
+        "Juan Sebastián Cabal et Robert Farah",
+        "Raven Klaasen et Lu Yen-hsun"
+      ],
+      "options_en": [
+        "Steve Johnson and Sam Querrey",
+        "Jean-Julien Rojer and Horia Tecău",
+        "Juan Sebastián Cabal and Robert Farah",
+        "Raven Klaasen and Lu Yen-hsun"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Les deux Colombiens ont enlevé le super tie-break décisif 10-7.",
+      "explication_en": "The two Colombians took the deciding super tie-break 10-7."
+    },
+    {
+      "id": "q33",
+      "question_fr": "Quelle paire américaine a gagné le double genevois en 2016 ?",
+      "question_en": "Which American pair won the Geneva doubles in 2016?",
+      "options_fr": [
+        "Bob et Mike Bryan",
+        "Rajeev Ram et Jack Sock",
+        "Mardy Fish et Andy Roddick",
+        "Steve Johnson et Sam Querrey"
+      ],
+      "options_en": [
+        "Bob and Mike Bryan",
+        "Rajeev Ram and Jack Sock",
+        "Mardy Fish and Andy Roddick",
+        "Steve Johnson and Sam Querrey"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Victoire nette 6-4, 6-1 en finale.",
+      "explication_en": "A clean 6-4, 6-1 win in the final."
+    },
+    {
+      "id": "q34",
+      "question_fr": "Avec qui Jamie Murray a-t-il gagné le double à Genève en 2023 ?",
+      "question_en": "With whom did Jamie Murray win the Geneva doubles in 2023?",
+      "options_fr": [
+        "Bruno Soares",
+        "Michael Venus",
+        "Neal Skupski",
+        "Horacio Zeballos"
+      ],
+      "options_en": [
+        "Bruno Soares",
+        "Michael Venus",
+        "Neal Skupski",
+        "Horacio Zeballos"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Le Britannique et le Néo-Zélandais ont gagné les deux sets au tie-break.",
+      "explication_en": "The Briton and the New Zealander took both sets in tie-breaks."
+    },
+    {
+      "id": "q35",
+      "question_fr": "Quelle paire française a gagné le double genevois en 2025 ?",
+      "question_en": "Which French pair won the Geneva doubles in 2025?",
+      "options_fr": [
+        "Nicolas Mahut et Édouard Roger-Vasselin",
+        "Ariel Behar et Joran Vliegen",
+        "Sadio Doumbia et Fabien Reboul",
+        "Pierre-Hugues Herbert et Arthur Rinderknech"
+      ],
+      "options_en": [
+        "Nicolas Mahut and Édouard Roger-Vasselin",
+        "Ariel Behar and Joran Vliegen",
+        "Sadio Doumbia and Fabien Reboul",
+        "Pierre-Hugues Herbert and Arthur Rinderknech"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Un super tie-break serré, enlevé 11 points à 9.",
+      "explication_en": "A tight super tie-break, won 11 points to 9."
+    },
+    {
+      "id": "q36",
+      "question_fr": "Quelle paire a perdu la finale du double en 2024 ?",
+      "question_en": "Which pair lost the 2024 doubles final?",
+      "options_fr": [
+        "Marcelo Arévalo et Mate Pavić",
+        "Jamie Murray et Michael Venus",
+        "Yuki Bhambri et Michael Venus",
+        "Jean-Julien Rojer et Lloyd Glasspool"
+      ],
+      "options_en": [
+        "Marcelo Arévalo and Mate Pavić",
+        "Jamie Murray and Michael Venus",
+        "Yuki Bhambri and Michael Venus",
+        "Jean-Julien Rojer and Lloyd Glasspool"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Battus 7-6, 7-5 par Marcelo Arévalo et Mate Pavić.",
+      "explication_en": "Beaten 7-6, 7-5 by Marcelo Arévalo and Mate Pavić."
+    },
+    {
+      "id": "q37",
+      "question_fr": "Quel Hongrois a remporté le tournoi en 2018 ?",
+      "question_en": "Which Hungarian won the tournament in 2018?",
+      "options_fr": [
+        "Márton Fucsovics",
+        "Attila Balázs",
+        "Zsombor Piros",
+        "Peter Gojowczyk"
+      ],
+      "options_en": [
+        "Márton Fucsovics",
+        "Attila Balázs",
+        "Zsombor Piros",
+        "Peter Gojowczyk"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Une finale expédiée en deux manches, 6-2, 6-2.",
+      "explication_en": "A final wrapped up in two sets, 6-2, 6-2."
+    },
+    {
+      "id": "q38",
+      "question_fr": "Qui Márton Fucsovics a-t-il battu en finale en 2018 ?",
+      "question_en": "Who did Márton Fucsovics beat in the 2018 final?",
+      "options_fr": [
+        "Mischa Zverev",
+        "Marin Čilić",
+        "Peter Gojowczyk",
+        "João Sousa"
+      ],
+      "options_en": [
+        "Mischa Zverev",
+        "Marin Čilić",
+        "Peter Gojowczyk",
+        "João Sousa"
+      ],
+      "correct_index": 2,
+      "explication_fr": "L'Allemand n'a pris que quatre jeux en finale.",
+      "explication_en": "The German managed only four games in the final."
+    },
+    {
+      "id": "q39",
+      "question_fr": "Qui Stan Wawrinka a-t-il battu pour son second titre genevois, en 2017 ?",
+      "question_en": "Who did Stan Wawrinka beat for his second Geneva title, in 2017?",
+      "options_fr": [
+        "Alexander Zverev",
+        "Marin Čilić",
+        "Peter Gojowczyk",
+        "Mischa Zverev"
+      ],
+      "options_en": [
+        "Alexander Zverev",
+        "Marin Čilić",
+        "Peter Gojowczyk",
+        "Mischa Zverev"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Le frère aîné d'Alexander, battu 4-6, 6-3, 6-3.",
+      "explication_en": "Alexander's older brother, beaten 4-6, 6-3, 6-3."
+    },
+    {
+      "id": "q40",
+      "question_fr": "Qui Casper Ruud a-t-il battu en finale en 2024 ?",
+      "question_en": "Who did Casper Ruud beat in the 2024 final?",
+      "options_fr": [
+        "Tomáš Macháč",
+        "João Sousa",
+        "Denis Shapovalov",
+        "Hubert Hurkacz"
+      ],
+      "options_en": [
+        "Tomáš Macháč",
+        "João Sousa",
+        "Denis Shapovalov",
+        "Hubert Hurkacz"
+      ],
+      "correct_index": 0,
+      "explication_fr": "7-5, 6-3 pour le Norvégien, qui décrochait là son troisième titre genevois.",
+      "explication_en": "7-5, 6-3 for the Norwegian, claiming his third Geneva title."
+    },
+    {
+      "id": "q41",
+      "question_fr": "Combien de titres genevois Casper Ruud a-t-il gagnés coup sur coup ?",
+      "question_en": "How many Geneva titles did Casper Ruud win back-to-back?",
+      "options_fr": [
+        "Deux",
+        "Trois",
+        "Quatre",
+        "Cinq"
+      ],
+      "options_en": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "correct_index": 0,
+      "explication_fr": "2021 et 2022 à la suite ; le troisième est venu en 2024.",
+      "explication_en": "2021 and 2022 in a row; the third came in 2024."
+    },
+    {
+      "id": "q42",
+      "question_fr": "En quelle année Grigor Dimitrov a-t-il atteint la finale à Genève ?",
+      "question_en": "In which year did Grigor Dimitrov reach the Geneva final?",
+      "options_fr": [
+        "2017",
+        "2019",
+        "2021",
+        "2023"
+      ],
+      "options_en": [
+        "2017",
+        "2019",
+        "2021",
+        "2023"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Invité cette année-là, le Bulgare s'est incliné devant Nicolás Jarry.",
+      "explication_en": "A wild card that year, the Bulgarian lost to Nicolás Jarry."
+    },
+    {
+      "id": "q43",
+      "question_fr": "Combien d'éditions se sont tenues depuis le retour en ATP 250 en 2015 ?",
+      "question_en": "How many editions have been held since the return to ATP 250 in 2015?",
+      "options_fr": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "options_en": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "correct_index": 3,
+      "explication_fr": "De 2015 à 2026, l'édition 2020 mise à part.",
+      "explication_en": "From 2015 to 2026, with 2020 the only one missing."
+    },
+    {
+      "id": "q44",
+      "question_fr": "Qui devançait Novak Djokovic comme tête de série numéro 1 en 2025 ?",
+      "question_en": "Who was seeded above Novak Djokovic as top seed in 2025?",
+      "options_fr": [
+        "Tomáš Macháč",
+        "Karen Khachanov",
+        "Hubert Hurkacz",
+        "Taylor Fritz"
+      ],
+      "options_en": [
+        "Tomáš Macháč",
+        "Karen Khachanov",
+        "Hubert Hurkacz",
+        "Taylor Fritz"
+      ],
+      "correct_index": 3,
+      "explication_fr": "L'Américain menait le tableau ; c'est pourtant Djokovic qui a soulevé le trophée.",
+      "explication_en": "The American headed the draw, yet Djokovic lifted the trophy."
+    },
+    {
+      "id": "q45",
+      "question_fr": "En combien de sets Novak Djokovic a-t-il gagné la finale 2025 ?",
+      "question_en": "In how many sets did Novak Djokovic win the 2025 final?",
+      "options_fr": [
+        "Deux",
+        "Trois",
+        "Quatre",
+        "Cinq"
+      ],
+      "options_en": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "correct_index": 1,
+      "explication_fr": "5-7, 7-6, 7-6 : deux tie-breaks pour renverser Hubert Hurkacz.",
+      "explication_en": "5-7, 7-6, 7-6 — two tie-breaks to turn it around against Hubert Hurkacz."
+    },
+    {
+      "id": "q46",
+      "question_fr": "Quelle dotation approximative le vainqueur du simple empoche-t-il ?",
+      "question_en": "Roughly how much prize money does the singles winner take home?",
+      "options_fr": [
+        "environ 30 000 €",
+        "environ 90 000 €",
+        "environ 250 000 €",
+        "environ 500 000 €"
+      ],
+      "options_en": [
+        "about €30,000",
+        "about €90,000",
+        "about €250,000",
+        "about €500,000"
+      ],
+      "correct_index": 1,
+      "explication_fr": "90 675 € pour le vainqueur de l'édition 2025.",
+      "explication_en": "€90,675 for the winner of the 2025 edition."
+    },
+    {
+      "id": "q47",
+      "question_fr": "Quelle était la nationalité du finaliste malheureux de 2026 ?",
+      "question_en": "What was the nationality of the 2026 runner-up?",
+      "options_fr": [
+        "Chilienne",
+        "Brésilienne",
+        "Argentine",
+        "Espagnole"
+      ],
+      "options_en": [
+        "Chilean",
+        "Brazilian",
+        "Argentine",
+        "Spanish"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Mariano Navone, battu par Learner Tien après avoir gagné le premier set.",
+      "explication_en": "Mariano Navone, beaten by Learner Tien after taking the opening set."
+    },
+    {
+      "id": "q48",
+      "question_fr": "Qui était tête de série numéro 2 du tableau 2026 ?",
+      "question_en": "Who was the second seed in the 2026 draw?",
+      "options_fr": [
+        "Learner Tien",
+        "Mariano Navone",
+        "Stefanos Tsitsipas",
+        "Alexander Bublik"
+      ],
+      "options_en": [
+        "Learner Tien",
+        "Mariano Navone",
+        "Stefanos Tsitsipas",
+        "Alexander Bublik"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Le Kazakh suivait Taylor Fritz au classement des têtes de série.",
+      "explication_en": "The Kazakh sat behind Taylor Fritz in the seedings."
+    },
+    {
+      "id": "q49",
+      "question_fr": "À quel stade Roger Federer a-t-il quitté le tournoi en 2021 ?",
+      "question_en": "At what stage did Roger Federer leave the tournament in 2021?",
+      "options_fr": [
+        "À son premier match",
+        "En quart de finale",
+        "En demi-finale",
+        "En finale"
+      ],
+      "options_en": [
+        "In his opening match",
+        "In the quarter-finals",
+        "In the semi-finals",
+        "In the final"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Tête de série numéro 1 et exempté de premier tour, il a chuté d'entrée.",
+      "explication_en": "Top seed with a first-round bye, he fell at the first hurdle."
+    },
+    {
+      "id": "q50",
+      "question_fr": "Combien de temps a duré le match entre Roger Federer et Pablo Andújar en 2021 ?",
+      "question_en": "How long did the 2021 match between Roger Federer and Pablo Andújar last?",
+      "options_fr": [
+        "Moins d'une heure",
+        "Environ deux heures",
+        "Environ trois heures",
+        "Plus de quatre heures"
+      ],
+      "options_en": [
+        "Under an hour",
+        "About two hours",
+        "About three hours",
+        "Over four hours"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Une heure cinquante-deux, pour le retour de Federer sur terre battue.",
+      "explication_en": "One hour fifty-two, on Federer's return to clay."
+    },
+    {
+      "id": "q51",
+      "question_fr": "En quel mois le tournoi se dispute-t-il ?",
+      "question_en": "In which month is the tournament played?",
+      "options_fr": [
+        "Février",
+        "Mars",
+        "Avril",
+        "Mai"
+      ],
+      "options_en": [
+        "February",
+        "March",
+        "April",
+        "May"
+      ],
+      "correct_index": 3,
+      "explication_fr": "La semaine qui précède immédiatement Roland-Garros.",
+      "explication_en": "The week immediately before Roland-Garros."
+    },
+    {
+      "id": "q52",
+      "question_fr": "Combien de temps dure le tournoi ?",
+      "question_en": "How long does the tournament last?",
+      "options_fr": [
+        "Trois jours",
+        "Une semaine",
+        "Deux semaines",
+        "Trois semaines"
+      ],
+      "options_en": [
+        "Three days",
+        "One week",
+        "Two weeks",
+        "Three weeks"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Du dimanche au samedi, qualifications comprises.",
+      "explication_en": "Sunday to Saturday, qualifying included."
+    },
+    {
+      "id": "q53",
+      "question_fr": "Combien de joueurs le tableau de qualifications compte-t-il ?",
+      "question_en": "How many players are in the qualifying draw?",
+      "options_fr": [
+        "16",
+        "24",
+        "32",
+        "48"
+      ],
+      "options_en": [
+        "16",
+        "24",
+        "32",
+        "48"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Seize joueurs pour quelques places dans le tableau principal.",
+      "explication_en": "Sixteen players competing for a handful of main-draw spots."
+    },
+    {
+      "id": "q54",
+      "question_fr": "Combien d'équipes le tableau de double compte-t-il ?",
+      "question_en": "How many teams are in the doubles draw?",
+      "options_fr": [
+        "8",
+        "12",
+        "16",
+        "24"
+      ],
+      "options_en": [
+        "8",
+        "12",
+        "16",
+        "24"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Seize paires, soit quatre tours jusqu'au titre.",
+      "explication_en": "Sixteen pairs, so four rounds to the title."
+    },
+    {
+      "id": "q55",
+      "question_fr": "Combien de têtes de série sont exemptées du premier tour ?",
+      "question_en": "How many seeds get a first-round bye?",
+      "options_fr": [
+        "Deux",
+        "Quatre",
+        "Six",
+        "Huit"
+      ],
+      "options_en": [
+        "Two",
+        "Four",
+        "Six",
+        "Eight"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Conséquence du tableau à 28 joueurs : les quatre premières têtes de série entrent au deuxième tour.",
+      "explication_en": "A consequence of the 28-player draw: the top four seeds start in round two."
+    },
+    {
+      "id": "q56",
+      "question_fr": "Dans quelle catégorie le tournoi est-il classé ?",
+      "question_en": "What category is the tournament classified in?",
+      "options_fr": [
+        "Challenger",
+        "ATP 250",
+        "ATP 500",
+        "Masters 1000"
+      ],
+      "options_en": [
+        "Challenger",
+        "ATP 250",
+        "ATP 500",
+        "Masters 1000"
+      ],
+      "correct_index": 1,
+      "explication_fr": "L'échelon d'entrée du circuit principal, où 250 points récompensent le vainqueur.",
+      "explication_en": "The entry tier of the main tour, worth 250 points to the winner."
+    },
+    {
+      "id": "q57",
+      "question_fr": "En quelle année le tournoi a-t-il retrouvé le circuit ATP principal ?",
+      "question_en": "In which year did the tournament return to the main ATP Tour?",
+      "options_fr": [
+        "2009",
+        "2012",
+        "2015",
+        "2018"
+      ],
+      "options_en": [
+        "2009",
+        "2012",
+        "2015",
+        "2018"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Après vingt-trois ans passés au niveau Challenger.",
+      "explication_en": "After twenty-three years at Challenger level."
+    },
+    {
+      "id": "q58",
+      "question_fr": "Combien de fois le tournoi a-t-il été annulé depuis 2015 ?",
+      "question_en": "How many times has the tournament been cancelled since 2015?",
+      "options_fr": [
+        "Jamais",
+        "Une fois",
+        "Deux fois",
+        "Trois fois"
+      ],
+      "options_en": [
+        "Never",
+        "Once",
+        "Twice",
+        "Three times"
+      ],
+      "correct_index": 1,
+      "explication_fr": "La seule édition manquante est celle de 2020.",
+      "explication_en": "The only missing edition is 2020."
+    },
+    {
+      "id": "q59",
+      "question_fr": "Comment le tournoi s'appelait-il avant l'arrivée de la Banque Gonet ?",
+      "question_en": "What was the tournament called before Banque Gonet arrived?",
+      "options_fr": [
+        "Swiss Open Geneva",
+        "Geneva Clay Championships",
+        "Léman Open",
+        "Banque Eric Sturdza Geneva Open"
+      ],
+      "options_en": [
+        "Swiss Open Geneva",
+        "Geneva Clay Championships",
+        "Léman Open",
+        "Banque Eric Sturdza Geneva Open"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Une autre banque genevoise en avait été le sponsor-titre jusqu'en 2020.",
+      "explication_en": "Another Geneva bank was title sponsor until 2020."
+    },
+    {
+      "id": "q60",
+      "question_fr": "Jusqu'à quelle année la Banque Gonet s'est-elle engagée comme sponsor-titre ?",
+      "question_en": "Until which year has Banque Gonet committed as title sponsor?",
+      "options_fr": [
+        "2026",
+        "2028",
+        "2030",
+        "2032"
+      ],
+      "options_en": [
+        "2026",
+        "2028",
+        "2030",
+        "2032"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Un engagement de long terme, annoncé pour la décennie.",
+      "explication_en": "A long-term commitment, announced for the decade."
+    },
+    {
+      "id": "q61",
+      "question_fr": "Au bord de quel lac le tournoi se déroule-t-il ?",
+      "question_en": "Which lake is the tournament played beside?",
+      "options_fr": [
+        "Le lac de Neuchâtel",
+        "Le lac de Zurich",
+        "Le lac Léman",
+        "Le lac de Constance"
+      ],
+      "options_en": [
+        "Lake Neuchâtel",
+        "Lake Zurich",
+        "Lake Geneva",
+        "Lake Constance"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Le Parc des Eaux-Vives descend jusqu'à la rive genevoise du lac.",
+      "explication_en": "Parc des Eaux-Vives runs down to the Geneva shore of the lake."
+    },
+    {
+      "id": "q62",
+      "question_fr": "Le tournoi se joue-t-il en salle ou en extérieur ?",
+      "question_en": "Is the tournament played indoors or outdoors?",
+      "options_fr": [
+        "En extérieur",
+        "En salle",
+        "Sous un toit rétractable",
+        "En salle une année sur deux"
+      ],
+      "options_en": [
+        "Outdoors",
+        "Indoors",
+        "Under a retractable roof",
+        "Indoors every other year"
+      ],
+      "correct_index": 0,
+      "explication_fr": "De la terre battue en plein air, à la merci du ciel genevois.",
+      "explication_en": "Outdoor clay, at the mercy of the Geneva sky."
+    },
+    {
+      "id": "q63",
+      "question_fr": "Quel autre tournoi ATP la Suisse accueille-t-elle, en salle à l'automne ?",
+      "question_en": "Which other ATP tournament does Switzerland host, indoors in autumn?",
+      "options_fr": [
+        "Les Swiss Indoors de Bâle",
+        "L'Open de Lausanne",
+        "Le Zurich Open",
+        "Le tournoi de Montreux"
+      ],
+      "options_en": [
+        "The Swiss Indoors in Basel",
+        "The Lausanne Open",
+        "The Zurich Open",
+        "The Montreux tournament"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Bâle accueille un ATP 500 sur dur, en octobre.",
+      "explication_en": "Basel hosts an ATP 500 on hard courts, in October."
+    },
+    {
+      "id": "q64",
+      "question_fr": "Sur quelle surface se disputent les Swiss Indoors de Bâle ?",
+      "question_en": "What surface is the Swiss Indoors in Basel played on?",
+      "options_fr": [
+        "Terre battue",
+        "Gazon",
+        "Dur extérieur",
+        "Dur en salle"
+      ],
+      "options_en": [
+        "Clay",
+        "Grass",
+        "Outdoor hard",
+        "Indoor hard"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Tout l'inverse de Genève : du dur, sous toit, en fin de saison.",
+      "explication_en": "The opposite of Geneva: hard courts, under a roof, late in the season."
+    },
+    {
+      "id": "q65",
+      "question_fr": "Quelle station suisse accueille un tournoi ATP sur terre battue en juillet ?",
+      "question_en": "Which Swiss resort hosts an ATP clay-court tournament in July?",
+      "options_fr": [
+        "Lugano",
+        "Sion",
+        "Gstaad",
+        "Verbier"
+      ],
+      "options_en": [
+        "Lugano",
+        "Sion",
+        "Gstaad",
+        "Verbier"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Le tournoi de Gstaad se joue en altitude, dans l'Oberland bernois.",
+      "explication_en": "The Gstaad tournament is played at altitude, in the Bernese Oberland."
+    },
+    {
+      "id": "q66",
+      "question_fr": "Combien de tournois du Grand Chelem se jouent sur terre battue ?",
+      "question_en": "How many Grand Slam tournaments are played on clay?",
+      "options_fr": [
+        "Un seul",
+        "Deux",
+        "Trois",
+        "Quatre"
+      ],
+      "options_en": [
+        "Just one",
+        "Two",
+        "Three",
+        "Four"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Roland-Garros, que le tournoi de Genève précède d'une semaine.",
+      "explication_en": "Roland-Garros, which Geneva precedes by one week."
+    },
+    {
+      "id": "q67",
+      "question_fr": "Qui a remporté le tournoi en 2022 ?",
+      "question_en": "Who won the tournament in 2022?",
+      "options_fr": [
+        "João Sousa",
+        "Casper Ruud",
+        "Nicolás Jarry",
+        "Alexander Zverev"
+      ],
+      "options_en": [
+        "João Sousa",
+        "Casper Ruud",
+        "Nicolás Jarry",
+        "Alexander Zverev"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Deuxième titre genevois d'affilée pour le Norvégien, au bout de trois manches.",
+      "explication_en": "A second straight Geneva title for the Norwegian, over three sets."
+    },
+    {
+      "id": "q68",
+      "question_fr": "Combien de finales Casper Ruud a-t-il disputées à Genève ?",
+      "question_en": "How many finals has Casper Ruud played in Geneva?",
+      "options_fr": [
+        "Deux",
+        "Trois",
+        "Quatre",
+        "Cinq"
+      ],
+      "options_en": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Trois finales, trois titres : il n'en a jamais perdu une seule ici.",
+      "explication_en": "Three finals, three titles — he has never lost one here."
+    },
+    {
+      "id": "q69",
+      "question_fr": "Qui avait gagné le tournoi l'année précédant le sacre de Learner Tien ?",
+      "question_en": "Who won the tournament the year before Learner Tien's triumph?",
+      "options_fr": [
+        "Casper Ruud",
+        "Nicolás Jarry",
+        "Novak Djokovic",
+        "Hubert Hurkacz"
+      ],
+      "options_en": [
+        "Casper Ruud",
+        "Nicolás Jarry",
+        "Novak Djokovic",
+        "Hubert Hurkacz"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Le Serbe s'était imposé en 2025, un an avant le premier sacre de l'Américain.",
+      "explication_en": "The Serb won in 2025, a year before the American's first title."
+    },
+    {
+      "id": "q70",
+      "question_fr": "Quelle est la nationalité du vainqueur de l'édition 2026 ?",
+      "question_en": "What is the nationality of the 2026 champion?",
+      "options_fr": [
+        "Argentine",
+        "Kazakhe",
+        "Grecque",
+        "Américaine"
+      ],
+      "options_en": [
+        "Argentine",
+        "Kazakh",
+        "Greek",
+        "American"
+      ],
+      "correct_index": 3,
+      "explication_fr": "Learner Tien est le premier Américain à s'imposer à Genève depuis le retour en ATP 250.",
+      "explication_en": "Learner Tien is the first American to win in Geneva since the return to ATP 250."
+    },
+    {
+      "id": "q71",
+      "question_fr": "Quelle est la nationalité de Hubert Hurkacz, finaliste en 2025 ?",
+      "question_en": "What is the nationality of Hubert Hurkacz, the 2025 runner-up?",
+      "options_fr": [
+        "Tchèque",
+        "Polonaise",
+        "Croate",
+        "Slovaque"
+      ],
+      "options_en": [
+        "Czech",
+        "Polish",
+        "Croatian",
+        "Slovak"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Il a poussé Novak Djokovic à deux tie-breaks avant de céder.",
+      "explication_en": "He pushed Novak Djokovic to two tie-breaks before giving way."
+    },
+    {
+      "id": "q72",
+      "question_fr": "Quel joueur français a reçu une invitation pour le tableau 2023 ?",
+      "question_en": "Which French player received a wild card for the 2023 draw?",
+      "options_fr": [
+        "Benoît Paire",
+        "Gaël Monfils",
+        "Richard Gasquet",
+        "Adrian Mannarino"
+      ],
+      "options_en": [
+        "Benoît Paire",
+        "Gaël Monfils",
+        "Richard Gasquet",
+        "Adrian Mannarino"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Il figurait parmi les trois invités, aux côtés de Dimitrov et Zverev.",
+      "explication_en": "He was one of three wild cards, alongside Dimitrov and Zverev."
+    },
+    {
+      "id": "q73",
+      "question_fr": "Quel Allemand, ancien vainqueur, a joué le tableau 2023 sur invitation ?",
+      "question_en": "Which German former champion played the 2023 draw on a wild card?",
+      "options_fr": [
+        "Jan-Lennard Struff",
+        "Dominik Koepfer",
+        "Alexander Zverev",
+        "Mischa Zverev"
+      ],
+      "options_en": [
+        "Jan-Lennard Struff",
+        "Dominik Koepfer",
+        "Alexander Zverev",
+        "Mischa Zverev"
+      ],
+      "correct_index": 2,
+      "explication_fr": "Vainqueur en 2019, il revenait à Genève quatre ans plus tard comme invité.",
+      "explication_en": "The 2019 champion returned to Geneva four years later as a wild card."
+    },
+    {
+      "id": "q74",
+      "question_fr": "Dans quelle ville suisse le tournoi se dispute-t-il ?",
+      "question_en": "In which Swiss city is the tournament played?",
+      "options_fr": [
+        "Genève",
+        "Lausanne",
+        "Bâle",
+        "Zurich"
+      ],
+      "options_en": [
+        "Geneva",
+        "Lausanne",
+        "Basel",
+        "Zurich"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Une semaine de terre battue au bord du Léman, avant le départ pour Paris.",
+      "explication_en": "A week of clay by Lake Geneva, before the trip to Paris."
+    },
+    {
+      "id": "q75",
+      "question_fr": "Combien de Suisses ont gagné le tournoi depuis son retour en ATP 250 ?",
+      "question_en": "How many Swiss players have won the tournament since its return to ATP 250?",
+      "options_fr": [
+        "Un seul",
+        "Deux",
+        "Trois",
+        "Quatre"
+      ],
+      "options_en": [
+        "Just one",
+        "Two",
+        "Three",
+        "Four"
+      ],
+      "correct_index": 0,
+      "explication_fr": "Stan Wawrinka, vainqueur deux années de suite en 2016 et 2017.",
+      "explication_en": "Stan Wawrinka, champion two years running in 2016 and 2017."
+    },
+    {
+      "id": "q76",
+      "question_fr": "Quelle paire a gagné le double genevois en 2017 ?",
+      "question_en": "Which pair won the Geneva doubles in 2017?",
+      "options_fr": [
+        "Juan Sebastián Cabal et Robert Farah",
+        "Jean-Julien Rojer et Horia Tecău",
+        "Steve Johnson et Sam Querrey",
+        "Oliver Marach et Mate Pavić"
+      ],
+      "options_en": [
+        "Juan Sebastián Cabal and Robert Farah",
+        "Jean-Julien Rojer and Horia Tecău",
+        "Steve Johnson and Sam Querrey",
+        "Oliver Marach and Mate Pavić"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Le Néerlandais et le Roumain ont renversé les tenants du titre colombiens.",
+      "explication_en": "The Dutchman and the Romanian overturned the Colombian defending champions."
+    },
+    {
+      "id": "q77",
+      "question_fr": "Quelle paire a gagné le double genevois en 2021 ?",
+      "question_en": "Which pair won the Geneva doubles in 2021?",
+      "options_fr": [
+        "Simone Bolelli et Máximo González",
+        "Juan Sebastián Cabal et Robert Farah",
+        "John Peers et Michael Venus",
+        "Oliver Marach et Mate Pavić"
+      ],
+      "options_en": [
+        "Simone Bolelli and Máximo González",
+        "Juan Sebastián Cabal and Robert Farah",
+        "John Peers and Michael Venus",
+        "Oliver Marach and Mate Pavić"
+      ],
+      "correct_index": 2,
+      "explication_fr": "L'Australien et le Néo-Zélandais se sont imposés 6-2, 7-5.",
+      "explication_en": "The Australian and the New Zealander won 6-2, 7-5."
+    },
+    {
+      "id": "q78",
+      "question_fr": "Quelle paire croate a gagné le double genevois en 2022 ?",
+      "question_en": "Which Croatian pair won the Geneva doubles in 2022?",
+      "options_fr": [
+        "Ivan Dodig et Mate Pavić",
+        "Nikola Mektić et Mate Pavić",
+        "Marin Čilić et Ivan Dodig",
+        "Marcelo Arévalo et Mate Pavić"
+      ],
+      "options_en": [
+        "Ivan Dodig and Mate Pavić",
+        "Nikola Mektić and Mate Pavić",
+        "Marin Čilić and Ivan Dodig",
+        "Marcelo Arévalo and Mate Pavić"
+      ],
+      "correct_index": 1,
+      "explication_fr": "Troisième titre genevois pour Pavić, cette fois avec son compatriote.",
+      "explication_en": "A third Geneva title for Pavić, this time with his compatriot."
     }
   ]
 }
