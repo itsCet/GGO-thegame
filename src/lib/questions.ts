@@ -13,11 +13,6 @@ function localize(q: RawQuestion, lang: Lang): Question {
   }
 }
 
-/** Taille du pool éditorial, affichée à l'accueil. */
-export function poolSize(): number {
-  return file.questions.length
-}
-
 /**
  * Tire `count` questions distinctes, au hasard, et retourne leurs
  * identifiants.

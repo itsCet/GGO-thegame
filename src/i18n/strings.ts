@@ -11,8 +11,6 @@ export interface Strings {
   /* Accueil */
   eyebrow: string
   homeTitle: string
-  questionCount: string // {n}
-  poolNote: string // {n}
   rules: string // {s}
   play: string
 
@@ -48,8 +46,6 @@ const fr: Strings = {
 
   eyebrow: 'ATP 250 · Genève · Terre battue',
   homeTitle: 'Connais‑tu vraiment le tournoi ?',
-  questionCount: '{n} questions',
-  poolNote: 'Tirées au hasard parmi {n}.',
   rules: '{s} secondes par question. Une seule réponse.',
   play: 'Jouer',
 
@@ -87,8 +83,6 @@ const en: Strings = {
 
   eyebrow: 'ATP 250 · Geneva · Clay',
   homeTitle: 'How well do you know the tournament?',
-  questionCount: '{n} questions',
-  poolNote: 'Drawn at random from {n}.',
   rules: '{s} seconds per question. One answer only.',
   play: 'Play',
 

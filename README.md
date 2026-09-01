@@ -38,7 +38,7 @@ Copier un bloc, lui donner un `id` libre mais unique, et vérifier que
 }
 ```
 
-Rien d'autre à toucher : l'accueil lit la taille du pool, et le tirage s'adapte.
+Rien d'autre à toucher : le tirage s'adapte tout seul à la taille du pool.
 
 **Deux points de vigilance éditoriale :**
 

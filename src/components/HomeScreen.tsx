@@ -1,7 +1,6 @@
-import { QUESTION_DURATION_MS, QUESTIONS_PER_GAME } from '../config'
+import { QUESTION_DURATION_MS } from '../config'
 import { useLang } from '../i18n/LanguageContext'
 import { format } from '../i18n/strings'
-import { poolSize } from '../lib/questions'
 import { Shell } from './Shell'
 
 interface Props {
@@ -10,7 +9,6 @@ interface Props {
 
 export function HomeScreen({ onStart }: Props) {
   const { t } = useLang()
-  const pool = poolSize()
 
   return (
     <Shell
@@ -38,11 +36,9 @@ export function HomeScreen({ onStart }: Props) {
 
         <hr className="mt-7 w-10 border-0 border-t-2 border-[color-mix(in_srgb,var(--c-on-brand-secondary)_35%,transparent)]" />
 
-        <p className="mt-5 text-[16px] leading-snug font-semibold text-[var(--c-on-brand-secondary)]">
-          {format(t.questionCount, { n: QUESTIONS_PER_GAME })}.{' '}
-          {format(t.poolNote, { n: pool })}
-        </p>
-        <p className="mt-1 text-[16px] leading-snug font-medium text-[var(--c-on-brand-secondary)]">
+        {/* Seule règle annoncée : le chrono. Être surpris par un compte à
+            rebours de 10 s dès la première question serait injuste. */}
+        <p className="mt-5 text-[16px] leading-snug font-medium text-[var(--c-on-brand-secondary)]">
           {format(t.rules, { s: QUESTION_DURATION_MS / 1000 })}
         </p>
       </div>
