@@ -6,7 +6,8 @@ Site statique, sans backend, destiné au sous-domaine `jeu.gonetgenevaopen.com`.
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm run build    # -> dist/
+npm run check    # valide src/data/questions.json
+npm run build    # check + tsc + vite build -> dist/
 npm run preview
 ```
 
@@ -50,6 +51,35 @@ Rien d'autre à toucher : le tirage s'adapte tout seul à la taille du pool.
 
 Le nombre de questions par partie se règle par `QUESTIONS_PER_GAME` dans
 `src/config.ts`.
+
+### Le pool est validé automatiquement
+
+```bash
+npm run check
+```
+
+**Ce script tourne au début de `npm run build`** : un pool incohérent ne part
+pas en production. C'est important, parce qu'une erreur dans ce fichier est
+silencieuse — un `correct_index` qui désigne la mauvaise option ne casse rien,
+le quiz tourne, il compte simplement faux.
+
+Bloque le build :
+
+- id manquant, en double, ou énoncé déjà présent ailleurs ;
+- `correct_index` absent, non entier, ou hors de 0–3 ;
+- autre chose que 4 options, une option vide, deux options identiques ;
+- énoncé ou explication vide dans l'une des deux langues ;
+- champ `serie` résiduel de l'ancien schéma ;
+- pool plus petit que le nombre de questions par partie.
+
+Signale sans bloquer :
+
+- un énoncé identique en FR et en EN — presque toujours une traduction oubliée ;
+- une position A/B/C/D qui porte moins de la moitié de sa part attendue de
+  bonnes réponses.
+
+Le script accepte un chemin en argument, ce qui permet de le tester sur des
+fichiers volontairement fautifs — les dix cas prévus ont été vérifiés un par un.
 
 **Écart assumé par rapport au brief :** le brief décrivait `options[4]`. Comme
 l'app est bilingue, le champ est dédoublé en `options_fr` / `options_en`, ce qui
@@ -288,6 +318,23 @@ Les lignes de base de la composition sont regroupées dans la constante `Y` en
 haut du fichier : c'est le seul endroit à toucher pour retoucher le rythme. Si
 l'image ne se charge pas, la carte retombe sur un aplat de marque plutôt que de
 faire échouer le partage.
+
+---
+
+## L'aperçu de lien
+
+Coller l'adresse du jeu dans WhatsApp, Slack, LinkedIn ou iMessage produit une
+grande vignette : `public/og.jpg` (1200 × 630, 215 ko), la vue aérienne du
+court central traitée à l'orange, avec le lockup officiel.
+
+**À ne pas confondre avec la carte de score**, qui est un tout autre objet :
+générée côté client au moment du partage, en 1080 × 1920, avec le score dedans.
+L'aperçu de lien, lui, est statique et identique pour tout le monde.
+
+L'url de l'image est **absolue** dans `index.html` : la plupart des robots
+d'aperçu ne résolvent pas les chemins relatifs. Si le domaine change,
+`og:image`, `twitter:image` et `og:url` sont à mettre à jour — ce sont les
+trois seules lignes concernées.
 
 ---
 

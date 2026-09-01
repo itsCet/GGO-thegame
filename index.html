@@ -6,23 +6,54 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#993c1d" />
+    <!-- Couleur de la barre de navigation sur Android : l'app ouvre sur la
+         photo assombrie, pas sur l'aplat orange. -->
+    <meta name="theme-color" content="#000413" />
     <meta name="color-scheme" content="light" />
     <title>Quiz — Gonet Geneva Open</title>
     <meta
       name="description"
       content="Sept questions sur le Gonet Geneva Open, ATP 250 sur terre battue à Genève."
     />
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Partage de l'url du jeu (la carte de score, elle, est générée côté client). -->
+    <!-- Aperçu quand l'adresse du jeu est collée dans une messagerie ou un
+         réseau social. À ne pas confondre avec la carte de score, qui est
+         générée côté client au moment du partage (src/lib/shareCard.ts).
+
+         L'url de l'image est ABSOLUE : la plupart des robots d'aperçu ne
+         résolvent pas les chemins relatifs. Si le domaine change, cette ligne
+         et og:url sont à mettre à jour. -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gonet Geneva Open" />
+    <meta property="og:url" content="https://jeu.gonetgenevaopen.com/" />
     <meta property="og:title" content="Quiz — Gonet Geneva Open" />
     <meta
       property="og:description"
       content="Sept questions, dix secondes chacune. Quel est ton score ?"
     />
+    <meta property="og:image" content="https://jeu.gonetgenevaopen.com/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Vue aérienne du court central du Gonet Geneva Open, au Parc des Eaux-Vives."
+    />
+    <meta property="og:locale" content="fr_CH" />
+    <meta property="og:locale:alternate" content="en_GB" />
+
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quiz — Gonet Geneva Open" />
+    <meta
+      name="twitter:description"
+      content="Sept questions, dix secondes chacune. Quel est ton score ?"
+    />
+    <meta name="twitter:image" content="https://jeu.gonetgenevaopen.com/og.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Vue aérienne du court central du Gonet Geneva Open, au Parc des Eaux-Vives."
+    />
   </head>
   <body>
     <div id="root"></div>
