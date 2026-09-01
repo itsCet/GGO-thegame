@@ -12,6 +12,7 @@ export function HomeScreen({ onStart }: Props) {
 
   return (
     <Shell
+      photo
       footer={
         <button
           type="button"

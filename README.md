@@ -161,39 +161,56 @@ carte de partage n'a pas bougé.
 
 ---
 
-## Le tracé de court
+## La photo de l'accueil
 
-`src/components/CourtLines.tsx` — un SVG posé derrière le contenu de l'accueil,
-de l'écran de question et du panneau de score, pour donner de la matière aux
-grands aplats orange.
+L'accueil est posé sur une vue aérienne du Parc des Eaux-Vives, pendant le
+tournoi. Source dans `design/photo-court.jpg` (2268 × 4032), servie en
+`public/menu-bg.webp` (810 × 1440, **126 ko**).
 
-Aux proportions réelles : le viewBox est en centimètres, 1097 × 2377, soit les
-10,97 × 23,77 m d'un court de double. Couloirs de simple à 1,37 m des lignes de
-double, lignes de service à 6,40 m du filet. Le tracé est volontairement plus
-large que l'écran (130 %) : on n'en voit qu'un recadrage, ce qui le fait lire
-comme une texture et non comme un pictogramme.
+### Le voile est cuit dans l'image, et sa valeur est mesurée
 
-**En SVG, pas en image** : ~1 ko, net à toutes les tailles, couleur et opacité
-pilotées par le thème via `currentColor`. Décoratif, donc `aria-hidden`.
+La photo est très contrastée : luminance médiane à 0,07 (les arbres) mais des
+blancs à 0,84 (les tribunes, les tentes). Du texte blanc posé dessus serait
+illisible sur les zones claires. Il faut donc un voile sombre, et sa force n'a
+pas été choisie à l'œil mais calculée sur le pire pixel de la photo :
 
-### L'opacité est mesurée, pas choisie à l'œil
-
-Les filets blancs éclaircissent localement l'orange, et le blanc n'y tient déjà
-que 3.56:1. Ce que ça donne, mesuré :
-
-| Opacité | Blanc sur le filet | Noir sur le filet |
+| Voile | Pire luminance | Blanc dessus |
 | --- | --- | --- |
-| 0.08 | 3.26 | 6.28 |
-| **0.10** | **3.18** | **6.43** |
-| 0.12 | 3.10 | 6.59 |
-| 0.16 | **2.96 — sous le seuil** | 6.92 |
+| 0,35 | 0,360 | 2,56 — échoue partout |
+| 0,45 | 0,252 | 3,48 — grand texte seulement |
+| 0,52 | 0,189 | 4,39 — encore sous le seuil |
+| **0,58** | **0,144** | **5,41 — AA texte courant** ✔ |
 
-Le défaut est donc à **0.10**, et il ne faut pas dépasser 0.12 sur un fond
-orange : à 0.16 le grand texte blanc passe sous les 3:1 réglementaires. Le
-texte courant, lui, est en noir et y gagne au contraire un peu de contraste.
+Le voile retenu est donc **0,58**, le minimum qui fasse passer le texte courant
+partout, tribunes comprises. Vérifié ensuite sur le rendu réel, sous chaque
+élément : titre 5,19, eyebrow 5,38, ligne de règle 5,98, bord du bouton 7,31.
 
-Sur le panneau de score, le fond est noir et le blanc y dispose de 20:1 : le
-tracé y est monté à 0.16 sans aucun risque.
+**Il est appliqué à l'export, pas en CSS** : cuire l'assombrissement dans le
+WebP fait tomber le fichier de 273 à 126 ko. La contrepartie est qu'ajuster le
+voile impose de réexporter — la marche à suivre est ci-dessous.
+
+### Conséquences sur les couleurs
+
+Sur ce fond sombre, deux tokens ne tiennent plus et sont redéfinis dans le
+conteneur photo (`PHOTO_TOKENS` dans `Shell.tsx`) — une variable CSS suffit,
+tout ce qui est à l'intérieur suit, y compris la bascule de langue :
+
+- `--c-on-brand-secondary` passe du noir au blanc ;
+- le bouton passe au **blanc**, pas à l'orange : mesuré dans la zone des
+  boutons, un aplat orange ne tient que **2,10:1** de contraste de bord là où
+  il en faut 3. Le blanc y monte à 7,46.
+
+Le fond de repli est `--c-brand-deep`, pas l'orange : si l'image ne se charge
+pas, le texte blanc doit rester lisible — sur l'orange il tomberait à 3,56.
+
+### Réexporter
+
+Redimensionner la source en 810 × 1440, appliquer un aplat `rgba(0,4,19,0.58)`
+par-dessus, exporter en WebP qualité 0,65. Si la photo change, refaire la
+mesure du pire pixel : une image plus claire demandera un voile plus fort.
+
+L'écran de question et l'écran de fin restent sur l'aplat orange. Les charger
+de photo nuirait à la lecture des réponses et du score.
 
 ---
 
@@ -245,7 +262,6 @@ src/
     theme.ts               Lecture des tokens CSS au runtime (pour le canvas)
   components/
     Shell.tsx              Cadre de marque : lockup en tête, logos en pied
-    CourtLines.tsx         Tracé de court en filigrane, derrière le contenu
     HomeScreen.tsx         Accueil, bouton Jouer
     QuestionScreen.tsx     Énoncé, réponses, chrono, feedback
     ScoreScreen.tsx        Écran de fin + partage

@@ -5,7 +5,6 @@ import { format } from '../i18n/strings'
 import { tierFor } from '../lib/score'
 import { shareImage } from '../lib/share'
 import { canvasToBlob, renderShareCard } from '../lib/shareCard'
-import { CourtLines } from './CourtLines'
 import { Shell } from './Shell'
 
 interface Props {
@@ -107,8 +106,7 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
       }
     >
       <div className="flex flex-1 flex-col justify-center py-2">
-        <section className="relative overflow-hidden rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
-          <CourtLines opacity={0.16} width="150%" />
+        <section className="rounded-[var(--r-card)] bg-[var(--c-brand-deep)] px-6 py-9 text-center">
           <h1
             className="relative text-[13px] font-bold uppercase"
             style={{ letterSpacing: 'var(--tracking-label)' }}

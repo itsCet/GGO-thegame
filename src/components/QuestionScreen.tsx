@@ -6,7 +6,6 @@ import { format } from '../i18n/strings'
 import { usePrefersReducedMotion } from '../lib/usePrefersReducedMotion'
 import type { Question } from '../types'
 import { AnswerButton } from './AnswerButton'
-import { CourtLines } from './CourtLines'
 import type { AnswerState } from './AnswerButton'
 import { ProgressDots } from './ProgressDots'
 import { TimerBar } from './TimerBar'
@@ -97,9 +96,7 @@ export function QuestionScreen({
   const correctText = question.options[question.correctIndex] ?? ''
 
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-[var(--c-brand)] text-[var(--c-on-brand)]">
-      <CourtLines />
-
+    <div className="flex min-h-dvh flex-col bg-[var(--c-brand)] text-[var(--c-on-brand)]">
       <header className="relative px-5 pt-5">
         <div className="flex items-center justify-between gap-4">
           <ProgressDots total={total} current={index} />
