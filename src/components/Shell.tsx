@@ -2,22 +2,37 @@ import type { CSSProperties, ReactNode } from 'react'
 import { TOURNAMENT } from '../config'
 import { LanguageSwitch } from './LanguageSwitch'
 
+/**
+ * Traitement de la photo de fond.
+ *
+ * - `plain`  : la vue aérienne telle quelle, seulement assombrie. C'est
+ *   l'accueil — on y veut le lieu, pas la marque.
+ * - `tinted` : la même vue passée à l'orange 166 C. C'est l'écran de fin,
+ *   celui qu'on capture et qu'on partage : il porte la couleur du tournoi.
+ *
+ * Deux fichiers distincts plutôt qu'un filtre CSS : la teinte est appliquée en
+ * `multiply` sur la photo d'origine. L'obtenir en CSS à partir de l'image déjà
+ * assombrie donnerait un résultat bien plus sombre, où le panneau de score
+ * cesserait de se détacher du fond.
+ */
+export type PhotoVariant = 'plain' | 'tinted'
+
+const PHOTO_SRC: Record<PhotoVariant, string> = {
+  plain: '/menu-bg.webp',
+  tinted: '/score-bg.webp',
+}
+
 interface Props {
   children: ReactNode
   /** Boutons d'action, épinglés au-dessus des logos. */
   footer?: ReactNode
   /**
    * Pose la photo aérienne du Parc des Eaux-Vives en fond, à la place de
-   * l'aplat orange. Réservé à l'accueil : les écrans qui portent beaucoup de
-   * texte restent sur l'aplat.
+   * l'aplat orange. L'écran de question, lui, reste sur l'aplat : quatre
+   * cartes de réponse et un bloc de feedback sur une photo nuiraient à la
+   * lecture.
    */
-  photo?: boolean
-  /**
-   * Voile sombre supplementaire par-dessus la photo, de 0 a 1. La photo porte
-   * deja son voile cuit a 0.58 ; celui-ci s'y ajoute en CSS pour les ecrans qui
-   * demandent un fond plus calme.
-   */
-  photoDim?: number
+  photo?: PhotoVariant
 }
 
 /**
@@ -28,9 +43,9 @@ interface Props {
  * de dupliquer les composants, on redéfinit trois variables sur le conteneur —
  * tout ce qui est à l'intérieur suit, y compris la bascule de langue.
  *
- * Le bouton passe en BLANC et non en orange : mesuré sur la photo exportée, un
- * aplat orange ne tient que 2.10:1 de contraste de bord dans la zone des
- * boutons, là où il en faut 3. Le blanc y monte à 7.46.
+ * Le bouton passe en BLANC et non en orange : sur `plain` un aplat orange ne
+ * tient que 2.10:1 de contraste de bord dans la zone des boutons, là où il en
+ * faut 3 ; et sur `tinted` il se confondrait avec un fond devenu orange.
  */
 const PHOTO_TOKENS = {
   '--c-on-brand-secondary': 'var(--c-on-brand)',
@@ -45,13 +60,9 @@ const PHOTO_TOKENS = {
  * gabarit officiel (design/the-game.svg) et servis en WebP transparent. On ne
  * pose pas le gabarit entier en fond : en 1080 × 1920 il ne tient pas le ratio
  * d'un téléphone, et l'étirer déformerait le lockup. Les deux blocs sont donc
- * placés en flux, et l'aplat de fond fait la jonction à n'importe quelle
- * hauteur d'écran.
- *
- * L'écran de question n'utilise pas ce cadre : il lui faut toute la hauteur
- * pour l'énoncé, les quatre réponses et le feedback.
+ * placés en flux, et le fond fait la jonction à n'importe quelle hauteur.
  */
-export function Shell({ children, footer, photo = false, photoDim = 0 }: Props) {
+export function Shell({ children, footer, photo }: Props) {
   return (
     <div
       className={`relative flex min-h-dvh flex-col overflow-hidden text-[var(--c-on-brand)] ${
@@ -64,20 +75,12 @@ export function Shell({ children, footer, photo = false, photoDim = 0 }: Props) 
     >
       {photo && (
         <img
-          src="/menu-bg.webp"
+          src={PHOTO_SRC[photo]}
           alt=""
           aria-hidden="true"
           width={810}
           height={1440}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-
-      {photo && photoDim > 0 && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{ backgroundColor: 'var(--c-brand-deep)', opacity: photoDim }}
         />
       )}
 

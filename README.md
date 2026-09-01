@@ -161,65 +161,93 @@ carte de partage n'a pas bougé.
 
 ---
 
-## La photo de l'accueil
+## Les photos de fond
 
-L'accueil est posé sur une vue aérienne du Parc des Eaux-Vives, pendant le
-tournoi. Source dans `design/photo-court.jpg` (2268 × 4032), servie en
-`public/menu-bg.webp` (810 × 1440, **126 ko**).
+L'accueil et l'écran de fin sont posés sur une vue aérienne du Parc des
+Eaux-Vives pendant le tournoi. Source unique dans `design/photo-court.jpg`
+(2268 × 4032), **deux traitements** :
 
-### Le voile est cuit dans l'image, et sa valeur est mesurée
+| Écran | Fichier | Traitement | Poids |
+| --- | --- | --- | --- |
+| Accueil | `public/menu-bg.webp` | photo naturelle, assombrie | 155 ko |
+| Écran de fin | `public/score-bg.webp` | photo passée à l'orange 166 C | 183 ko |
 
-La photo est très contrastée : luminance médiane à 0,07 (les arbres) mais des
-blancs à 0,84 (les tribunes, les tentes). Du texte blanc posé dessus serait
-illisible sur les zones claires. Il faut donc un voile sombre, et sa force n'a
-pas été choisie à l'œil mais calculée sur le pire pixel de la photo :
+L'accueil montre **le lieu** ; l'écran de fin, celui qu'on capture et qu'on
+partage, porte **la couleur du tournoi**.
 
-| Voile | Pire luminance | Blanc dessus |
+### Pourquoi deux fichiers et pas un filtre CSS
+
+La teinte est appliquée en `multiply` sur la photo d'origine. L'obtenir en CSS
+à partir de l'image déjà assombrie donnerait un résultat bien plus sombre, où le
+panneau de score cesserait de se détacher du fond. Les deux images sont servies
+sur des écrans différents : elles ne sont jamais chargées en même temps.
+
+### Le traitement est cuit dans l'image, et mesuré
+
+La photo brute ne peut pas porter de texte : luminance médiane à 0,07 sur les
+arbres, mais des blancs à 0,84 sur les tribunes.
+
+**Accueil** — voile noir #000413 à **0,58**, la valeur minimale qui fasse passer
+le texte courant partout :
+
+| Voile | Blanc sur le pire pixel |
+| --- | --- |
+| 0,45 | 3,48 — grand texte seulement |
+| 0,52 | 4,39 — encore sous le seuil |
+| **0,58** | **5,41** ✔ |
+
+**Écran de fin** — orange 166 C en `multiply` à **0,75**, puis voile noir à
+**0,25**. En `multiply` et non en aplat normal : un film orange posé par-dessus
+*éclaircit* et délave, et fait tomber le blanc à 3,62.
+
+| Traitement | Blanc | Panneau de score vs photo |
 | --- | --- | --- |
-| 0,35 | 0,360 | 2,56 — échoue partout |
-| 0,45 | 0,252 | 3,48 — grand texte seulement |
-| 0,52 | 0,189 | 4,39 — encore sous le seuil |
-| **0,58** | **0,144** | **5,41 — AA texte courant** ✔ |
+| Noir 0,58 seul | 5,36 | 2,81 — sous le seuil |
+| Orange multiply seul | 3,81 — échoue | — |
+| Noir 0,45 + orange normal 0,18 | 3,62 — échoue | — |
+| Orange multiply + noir 0,30 | 6,80 | 2,47 — sous le seuil |
+| **Orange multiply 0,75 + noir 0,25** | **4,62 à 5,48** | **3,45 à 4,09** ✔ |
 
-Le voile retenu est donc **0,58**, le minimum qui fasse passer le texte courant
-partout, tribunes comprises. Vérifié ensuite sur le rendu réel, sous chaque
-élément : titre 5,19, eyebrow 5,38, ligne de règle 5,98, bord du bouton 7,31.
+La recette retenue est la seule qui tienne les deux contraintes. Les variantes
+plus sombres donnent un texte plus lisible mais **écrasent le panneau de
+score** : plus le fond est sombre, plus il se confond avec le panneau noir.
 
-**Il est appliqué à l'export, pas en CSS** : cuire l'assombrissement dans le
-WebP fait tomber le fichier de 273 à 126 ko. La contrepartie est qu'ajuster le
-voile impose de réexporter — la marche à suivre est ci-dessous.
+Mesuré sur le rendu final :
+
+| | Accueil | Écran de fin |
+| --- | --- | --- |
+| Titre (38 px gras, seuil 3,0) | 4,22 | — |
+| Eyebrow 12 px (seuil 4,5) | 4,65 | — |
+| Ligne de règle 16 px | 5,23 | — |
+| Panneau de score (seuil 3,0) | — | 4,48 |
+| Bouton plein | 7,01 | 5,11 |
+| Contours Rejouer / Menu | — | 5,67 / 7,01 |
+| Lockup et logos | 7,54 | 5,78 / 7,12 |
 
 ### Conséquences sur les couleurs
 
-Sur ce fond sombre, deux tokens ne tiennent plus et sont redéfinis dans le
+Sur ces fonds sombres, deux tokens ne tiennent plus et sont redéfinis dans le
 conteneur photo (`PHOTO_TOKENS` dans `Shell.tsx`) — une variable CSS suffit,
 tout ce qui est à l'intérieur suit, y compris la bascule de langue :
 
 - `--c-on-brand-secondary` passe du noir au blanc ;
-- le bouton passe au **blanc**, pas à l'orange : mesuré dans la zone des
-  boutons, un aplat orange ne tient que **2,10:1** de contraste de bord là où
-  il en faut 3. Le blanc y monte à 7,46.
+- le bouton passe au **blanc**, pas à l'orange : sur `plain` un aplat orange ne
+  tient que 2,10:1 de contraste de bord dans la zone des boutons, et sur
+  `tinted` il se confondrait avec un fond devenu orange.
 
 Le fond de repli est `--c-brand-deep`, pas l'orange : si l'image ne se charge
 pas, le texte blanc doit rester lisible — sur l'orange il tomberait à 3,56.
 
 ### Réexporter
 
-Redimensionner la source en 810 × 1440, appliquer un aplat `rgba(0,4,19,0.58)`
-par-dessus, exporter en WebP qualité 0,65. Si la photo change, refaire la
-mesure du pire pixel : une image plus claire demandera un voile plus fort.
+Redimensionner la source en 810 × 1440, puis :
 
-### L'écran de fin aussi
+- **accueil** : aplat `rgba(0,4,19,0.58)` par-dessus ;
+- **écran de fin** : orange `#ea580c` en `multiply` à 0,75, puis aplat
+  `#000413` à 0,25.
 
-Même image, avec un voile CSS supplémentaire de 0,18 par-dessus le voile cuit :
-le fond y est plus calme, le panneau de score s'en détache. Zéro octet de plus,
-c'est le même fichier.
-
-Mesuré sur le rendu : bouton blanc 7,61 de contraste de bord, contours Rejouer
-8,24 et Menu 9,17 — tous très au-dessus des 3:1 exigés. Le panneau noir, lui,
-n'est qu'à **2,81** contre les zones les plus claires de la photo. C'est sous le
-seuil, mais ce panneau n'est pas un composant d'interface : c'est un cadre
-décoratif autour d'un texte déjà à 20:1. Un filet blanc à 32 % en marque le bord.
+Exporter en WebP qualité 0,65. Si la photo change, refaire les deux mesures :
+blanc sur le pire pixel, et panneau noir contre le pire pixel.
 
 **L'écran de question reste sur l'aplat orange** : quatre cartes de réponse et
 un bloc de feedback par-dessus une photo nuiraient à la lecture.
@@ -335,6 +363,8 @@ src/
 | JS | 229 ko | **72 ko** |
 | CSS | 15 ko | 4 ko |
 | Habillage (lockup + logos) | — | 45 ko |
+| Photo de l’accueil | — | 155 ko |
+| Photo de l’écran de fin | — | 183 ko |
 | Fond de carte (au partage seulement) | — | 72 ko |
 
 Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les

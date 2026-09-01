@@ -70,8 +70,7 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
 
   return (
     <Shell
-      photo
-      photoDim={0.18}
+      photo="tinted"
       footer={
         <div className="flex flex-col gap-2.5">
           <button
