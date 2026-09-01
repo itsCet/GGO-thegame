@@ -4,28 +4,46 @@ import { readTheme } from './theme'
 /* ============================================================================
    CARTE DE PARTAGE — 1080 × 1920 (format story)
    ----------------------------------------------------------------------------
-   Le fond est le gabarit officiel « QUIZ GAME » (design/the-game.svg, exporté
-   en public/share-card-bg.webp). On ne redessine ni le lockup ni les logos :
-   on compose uniquement le score dans la zone laissée libre.
+   La carte reprend l'écran de fin : même photo teintée orange, même lockup,
+   mêmes logos. Ce qu'on capture et ce qu'on partage doivent se ressembler.
 
-   Relevé du gabarit (balayage des pixels blancs sur le rendu 1080 × 1920) :
+   Elle reconstitue la structure du gabarit officiel (design/the-game.svg) plutôt
+   que d'en poser l'image : le lockup et les logos en sont découpés en WebP
+   transparent, et sont redessinés ICI, aux positions exactes qu'ils occupaient
+   dans le gabarit. Seul le fond change — la photo remplace l'aplat orange.
+
+   Relevé du gabarit d'origine, mesuré au balayage des pixels blancs :
 
         0 ....... haut du cadre
-      263–452 ... lockup « QUIZ GAME » + « GONET GENEVA OPEN »
-      470–1660 .. ZONE LIBRE — tout ce que dessine ce module
-     1683–1776 .. logos Gonet Geneva Open + ATP 250
+      262–460 ... lockup « QUIZ GAME » + « GONET GENEVA OPEN »
+      470–1660 .. ZONE LIBRE — tout ce que compose ce module
+     1677–1815 .. logos Gonet Geneva Open + ATP 250
      1920 ...... bas du cadre
 
-   Contraste : le fond est l'orange 166 C, sur lequel le blanc ne monte qu'à
-   3.56:1. Tout le texte posé ici est donc en grand corps (≥ 24px, ou ≥ 19px
-   gras), seuil auquel 3:1 suffit. Aucun texte courant n'est posé sur l'orange.
+   Les trois images sont déjà en cache au moment du partage : la photo et les
+   deux blocs sont affichés par l'écran de fin lui-même. Aucune requête réseau
+   supplémentaire.
+
+   Contraste : sur la photo teintée, le blanc tient 4.62 à 5.48 selon les zones
+   — au-dessus du seuil du texte courant, donc valable pour tous les corps
+   employés ici.
    ========================================================================== */
 
 export const CARD_W = 1080
 export const CARD_H = 1920
 
-/** Gabarit officiel. Le remplacer ici suffit à changer toute la carte. */
-const BACKGROUND_SRC = '/share-card-bg.webp'
+/**
+ * Fond de la carte : la photo teintée de l'écran de fin.
+ *
+ * Pour revenir au gabarit officiel à plat, réexporter design/the-game.svg en
+ * 1080 × 1920 et pointer ici dessus — il faudra alors retirer les tracés du
+ * lockup et des logos plus bas, le gabarit les portant déjà.
+ */
+const BACKGROUND_SRC = '/score-bg.webp'
+
+/** Blocs de marque découpés du gabarit, redessinés à leur position d'origine. */
+const LOCKUP = { src: '/lockup.webp', x: 135, y: 258, w: 826, h: 202 }
+const LOGOS = { src: '/logos.webp', x: 392, y: 1677, w: 296, h: 138 }
 
 const CX = CARD_W / 2
 
@@ -186,15 +204,26 @@ export async function renderShareCard(
   ctx.textBaseline = 'alphabetic'
   ctx.textAlign = 'center'
 
-  // Gabarit officiel. S'il ne se charge pas, on retombe sur un aplat de marque
-  // plutôt que de faire échouer le partage.
-  const background = await loadImage(BACKGROUND_SRC)
+  // Les trois blocs sont chargés en parallèle ; chacun peut manquer sans faire
+  // échouer le partage. Le fond retombe alors sur un aplat de marque, et les
+  // blocs manquants sont simplement omis.
+  const [background, lockup, logos] = await Promise.all([
+    loadImage(BACKGROUND_SRC),
+    loadImage(LOCKUP.src),
+    loadImage(LOGOS.src),
+  ])
+
   if (background) {
     ctx.drawImage(background, 0, 0, CARD_W, CARD_H)
   } else {
-    ctx.fillStyle = theme.brand
+    // Repli SOMBRE et non orange : tout le texte de la carte est blanc, et il
+    // ne tiendrait que 3.56:1 sur l'orange.
+    ctx.fillStyle = theme.brandDeep
     ctx.fillRect(0, 0, CARD_W, CARD_H)
   }
+
+  if (lockup) ctx.drawImage(lockup, LOCKUP.x, LOCKUP.y, LOCKUP.w, LOCKUP.h)
+  if (logos) ctx.drawImage(logos, LOGOS.x, LOGOS.y, LOGOS.w, LOGOS.h)
 
   const ink = theme.onBrand
 

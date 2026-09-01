@@ -296,28 +296,57 @@ feedback, qui vient les occuper à la sélection sans rien faire sauter.
 
 ## La carte de partage
 
-`src/lib/shareCard.ts` — 1080 × 1920, générée en canvas côté client, puis passée
-à la Web Share API avec le fichier, ou téléchargée si l'API n'accepte pas les
-fichiers (`src/lib/share.ts`).
+`src/lib/shareCard.ts` — 1080 × 1920, générée en canvas côté client, puis
+passée à la Web Share API avec le fichier, ou téléchargée si l'API n'accepte pas
+les fichiers (`src/lib/share.ts`).
 
-Le fond est le gabarit officiel, exporté en `public/share-card-bg.webp`
-(**72 ko**). Le module ne redessine ni le lockup ni les logos : il compose
-uniquement le score dans la zone laissée libre.
+**Elle reprend l'écran de fin** : même photo teintée orange, même lockup, mêmes
+logos. Ce qu'on capture et ce qu'on partage doivent se ressembler — ce n'était
+pas le cas tant que la carte utilisait le gabarit plat alors que l'écran était
+passé à la photo.
 
-Relevé du gabarit, mesuré au balayage de pixels sur le rendu 1080 × 1920 :
+Elle **reconstitue** la structure du gabarit officiel plutôt que d'en poser
+l'image : le lockup et les logos en ont été découpés en WebP transparent, et
+sont redessinés aux positions exactes qu'ils occupaient dedans.
 
 ```
    0 ....... haut du cadre
- 263–452 ... lockup « QUIZ GAME » + « GONET GENEVA OPEN »
- 470–1660 .. ZONE LIBRE — tout ce que dessine shareCard.ts
-1683–1776 .. logos Gonet Geneva Open + ATP 250
+ 262–460 ... lockup « QUIZ GAME » + « GONET GENEVA OPEN »
+ 470–1660 .. ZONE LIBRE — tout ce que compose shareCard.ts
+1677–1815 .. logos Gonet Geneva Open + ATP 250
 1920 ...... bas du cadre
 ```
 
+Les trois images sont **déjà en cache** au moment du partage : l'écran de fin
+les affiche lui-même. Aucune requête réseau supplémentaire, et le gabarit à plat
+(`share-card-bg.webp`, 74 ko) a pu être retiré du dossier servi.
+
 Les lignes de base de la composition sont regroupées dans la constante `Y` en
-haut du fichier : c'est le seul endroit à toucher pour retoucher le rythme. Si
-l'image ne se charge pas, la carte retombe sur un aplat de marque plutôt que de
-faire échouer le partage.
+haut du fichier : c'est le seul endroit à toucher pour retoucher le rythme.
+
+Contraste du blanc sur le fond, mesuré zone par zone sur la carte générée :
+
+| Zone | Blanc |
+| --- | --- |
+| Lockup | 4,52 |
+| Ligne de contexte | 4,69 |
+| Label « Ton score » | 4,38 |
+| Le chiffre | 4,46 |
+| Palier | 5,23 |
+| Phrase du palier | 6,77 |
+| Appel à jouer et adresse | 6,04 |
+| Logos | 5,47 |
+
+Tout le texte de la carte est en gros corps (≥ 26 px gras) : le seuil applicable
+est 3:1, largement tenu partout.
+
+Si une image manque, la carte ne casse pas : le fond retombe sur un aplat sombre
+— et non orange, où le blanc ne tiendrait que 3,56 — et les blocs absents sont
+simplement omis.
+
+**Pour revenir au gabarit officiel à plat**, réexporter `design/the-game.svg`
+en 1080 × 1920, pointer `BACKGROUND_SRC` dessus, et retirer les tracés du
+lockup et des logos : le gabarit les porte déjà.
 
 ---
 
@@ -411,8 +440,8 @@ src/
 | CSS | 15 ko | 4 ko |
 | Habillage (lockup + logos) | — | 45 ko |
 | Photo de l’accueil | — | 155 ko |
-| Photo de l’écran de fin | — | 183 ko |
-| Fond de carte (au partage seulement) | — | 72 ko |
+| Photo de l’écran de fin (sert aussi de fond à la carte) | — | 183 ko |
+| Aperçu de lien (robots seulement) | — | 215 ko |
 
 Le poids JS vient presque entièrement de `react-dom` ; le code du jeu et les
 78 questions pèsent ~48 ko. La cible de 150 ko est tenue en transféré, pas en
