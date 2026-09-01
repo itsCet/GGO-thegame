@@ -340,6 +340,18 @@ Contraste du blanc sur le fond, mesuré zone par zone sur la carte générée :
 Tout le texte de la carte est en gros corps (≥ 26 px gras) : le seuil applicable
 est 3:1, largement tenu partout.
 
+### Le fichier est un JPEG, pas un PNG
+
+Le fond est une photographie. En PNG la carte pèse **4,1 Mo** ; en JPEG à 0,90,
+**559 ko**, et l'encodage tombe de 93 ms à 23 ms. Le PNG se justifiait tant que
+le fond était l'aplat du gabarit — quelques couleurs seulement. Il ne se
+justifie plus depuis la photo, et 4 Mo à faire avaler à une feuille de partage
+sur mobile, c'est long et parfois refusé.
+
+`CARD_MIME` et `CARD_EXT` sont exportés ensemble depuis `shareCard.ts` :
+le type du blob, l'extension du fichier et le type du `File` remis à la Web
+Share API ne peuvent pas diverger.
+
 Si une image manque, la carte ne casse pas : le fond retombe sur un aplat sombre
 — et non orange, où le blanc ne tiendrait que 3,56 — et les blocs absents sont
 simplement omis.

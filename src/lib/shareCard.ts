@@ -292,11 +292,27 @@ export async function renderShareCard(
   return canvas
 }
 
+/** Type et extension du fichier partagé — gardés ensemble pour rester cohérents. */
+export const CARD_MIME = 'image/jpeg'
+export const CARD_EXT = 'jpg'
+
+/**
+ * Export en JPEG, pas en PNG.
+ *
+ * Le fond est une photographie : en PNG la carte pèse **4,1 Mo**, contre 609 ko
+ * en JPEG à 0,90 — et l'encodage passe de 93 ms à 23 ms. Le PNG se justifiait
+ * tant que le fond était l'aplat du gabarit, quelques couleurs seulement ; il
+ * ne se justifie plus du tout depuis la photo.
+ *
+ * Aucune transparence n'est nécessaire, et les plateformes sociales
+ * recompressent de toute façon ce qu'on leur donne.
+ */
 export function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
-      (blob) => (blob ? resolve(blob) : reject(new Error('Export PNG impossible'))),
-      'image/png',
+      (blob) => (blob ? resolve(blob) : reject(new Error('Export de la carte impossible'))),
+      CARD_MIME,
+      0.9,
     )
   })
 }

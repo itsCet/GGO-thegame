@@ -4,7 +4,7 @@ import { useLang } from '../i18n/LanguageContext'
 import { format } from '../i18n/strings'
 import { tierFor } from '../lib/score'
 import { shareImage } from '../lib/share'
-import { canvasToBlob, renderShareCard } from '../lib/shareCard'
+import { CARD_EXT, canvasToBlob, renderShareCard } from '../lib/shareCard'
 import { Shell } from './Shell'
 
 interface Props {
@@ -46,7 +46,7 @@ export function ScoreScreen({ score, total, onReplay, onMenu }: Props) {
       const blob = await canvasToBlob(canvas)
       const outcome = await shareImage({
         blob,
-        filename: `gonet-geneva-open-${score}-sur-${total}.png`,
+        filename: `gonet-geneva-open-${score}-sur-${total}.${CARD_EXT}`,
         title: TOURNAMENT.name,
         text: `${tier.label} — ${format(t.outOf, { score, total })} · ${TOURNAMENT.url}`,
       })
